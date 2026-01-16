@@ -14,8 +14,29 @@ background: url("img/cabecera.jpeg") center / cover no-repeat;
 position: relative;
 }
 
-/* ❌ QUITAMOS COMPLETAMENTE EL DIFUMINADO DE UNIÓN */
-/* (antes estaba con ::after) */
+/* ================= LINEA DORADA ENTRE FONDOS ================= */
+.linea-dorada {
+  width: 100%;
+  height: 180px; /* altura visual */
+  background-image: url("img/lineadorada4.png");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: 100% 100%;
+  position: relative;
+  z-index: 5;
+  margin-top: -45px;   /* se superpone a la cabecera */
+  margin-bottom: -45px;/* se superpone al fondo liso */
+}
+
+/* Ajuste móvil */
+@media (max-width: 480px) {
+  .linea-dorada {
+    height: 60px;
+    margin-top: -30px;
+    margin-bottom: -30px;
+  }
+}
+
 
 /* ================= FONDO LISO ================= */
 .fondo-liso {
@@ -80,8 +101,9 @@ padding: 60px 20px;
 }
 
 h3 {
+  font-family: 'Great Vibes', cursive;
 color: #d4af37;
-font-size: 2rem;
+font-size: clamp(2.8rem, 9vw, 4.2rem);
 margin-bottom: 10px;
 }
 

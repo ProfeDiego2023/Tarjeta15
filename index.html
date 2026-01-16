@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -7,86 +6,78 @@
   <title>Invitación</title>
 
   <!-- FUENTES -->
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-
   <link rel="stylesheet" href="estilos.css">
 </head>
 
 <body>
 
-  <!-- CABECERA / FOTO PRINCIPAL -->
-
+  <!-- CABECERA / FOTO PRINCIPAL (UNA SOLA VEZ) -->
   <section class="hero-fondo"></section>
 
-  <!-- FONDO LISO CON VELO + ESTRELLAS + CONTENIDO -->
+  <!-- LÍNEA DORADA -->
+  <div class="linea-dorada"></div>
 
-  <main class="fondo-liso">
+  <!-- FONDO LISO CON TODO EL CONTENIDO -->
+  <section class="fondo-liso">
+    <div class="velo"></div>
+    <div class="estrellas"></div>
 
-```
-<!-- capas visuales -->
-<div class="velo"></div>
-<div class="estrellas"></div>
+    <!-- TEXTO -->
+    <section class="contenido">
+      <h3>Te esperamos ✨</h3>
+      <p>Una noche especial para compartir, celebrar y disfrutar juntos.</p>
+    </section>
 
-<!-- CONTENIDO -->
-<section class="contenido">
-  <h3>Te esperamos ✨</h3>
-  <p>
-    Una noche especial para compartir, celebrar y disfrutar juntos.
-  </p>
-</section>
+    <!-- CONTADOR -->
+    <section class="esperamos">
+      <p class="frase">Faltan...</p>
 
-<!-- CONTADOR -->
-<section class="esperamos">
-  <p class="frase">Faltan...</p>
+      <div id="contador" class="contador">
+        <div class="bloque">
+          <span id="dias">0</span>
+          <small>Días</small>
+        </div>
+        <div class="bloque">
+          <span id="horas">0</span>
+          <small>Horas</small>
+        </div>
+        <div class="bloque">
+          <span id="minutos">0</span>
+          <small>Min</small>
+        </div>
+        <div class="bloque">
+          <span id="segundos">0</span>
+          <small>Seg</small>
+        </div>
+      </div>
 
-  <div id="contador" class="contador">
-    <div class="bloque">
-      <span id="dias">0</span>
-      <small>Días</small>
-    </div>
-    <div class="bloque">
-      <span id="horas">0</span>
-      <small>Horas</small>
-    </div>
-    <div class="bloque">
-      <span id="minutos">0</span>
-      <small>Min</small>
-    </div>
-    <div class="bloque">
-      <span id="segundos">0</span>
-      <small>Seg</small>
-    </div>
-  </div>
+      <p id="mensaje-contador" class="mensaje-contador"></p>
+    </section>
 
-  <p id="mensaje-contador" class="mensaje-contador"></p>
-</section>
+    <!-- UBICACIÓN -->
+    <section class="contenido">
+      <h3>Ubicación</h3>
+      <p>
+        Club Social Aarón Castellanos<br>
+        Rivadavia 2078, Esperanza, Santa Fe
+      </p>
 
-<!-- UBICACIÓN -->
-<section class="contenido">
-  <h3>Ubicación</h3>
-  <p>
-    Club Social Aaron Castellanos<br>
-    Rivadavia 2078, Esperanza, Santa Fe
-  </p>
+      <a
+        class="btn-maps"
+        href="https://www.google.com/maps/search/?api=1&query=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
+        target="_blank"
+        rel="noopener">
+        Cómo llegar
+      </a>
+    </section>
 
-  <a
-    class="btn-maps"
-    href="https://www.google.com/maps/search/?api=1&query=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
-    target="_blank"
-    rel="noopener">
-    Cómo llegar
-  </a>
-</section>
-```
-
-  </main>
+  </section>
 
   <!-- SCRIPT CONTADOR -->
-
   <script>
     (() => {
       const fechaEvento = new Date("2026-02-28T21:00:00").getTime();
