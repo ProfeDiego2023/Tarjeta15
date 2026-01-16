@@ -1,310 +1,220 @@
 /* ================= BASE ================= */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(circle, #000, #000);
+  font-family: 'Playfair Display', serif;
   color: #fff;
   text-align: center;
   overflow-x: hidden;
 }
 
-/* ================= REVEAL ================= */
-.reveal {
-  opacity: 0;
-  transform: translateY(60px) scale(0.98);
-  transition: all 1.2s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.reveal.fade-left { transform: translateX(-60px); }
-.reveal.fade-right { transform: translateX(60px); }
-
-.reveal.fade-left.visible,
-.reveal.fade-right.visible {
-  transform: translateX(0);
-}
-
-/* ================= HERO ================= */
+/* ================= CABECERA ================= */
 .hero-fondo {
-  position: relative;
   min-height: 100svh;
-  background: url("img/fondo.jpg") center / cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: url("img/cabecera.jpeg") center / cover no-repeat;
+  position: relative;
 }
 
-.hero-fondo::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.85));
-}
-
+/* FUNDIDO SUAVE HACIA ABAJO */
 .hero-fondo::after {
   content: "";
   position: absolute;
-  bottom: -1px;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 120px;
-  background: #000;
-  border-radius: 100% 100% 0 0;
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.35) 50%,
+    rgba(0,0,0,0.75) 100%
+  );
 }
 
-.overlay {
+/* ================= FONDO LISO ================= */
+.fondo-liso {
+  background: url("img/fondoliso.jpeg") center / cover no-repeat;
+  min-height: 100vh;
   position: relative;
-  z-index: 3;
-  padding: 40px 20px;
 }
 
-/* ================= BRILLOS ================= */
-.brillos {
+/* FUNDIDO SUAVE DESDE ARRIBA */
+.fondo-liso::before {
+  content: "";
   position: absolute;
-  inset: 0;
-  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.35) 50%,
+    rgba(0,0,0,0.75) 100%
+  );
+}
+
+/* ================= CONTENIDO ================= */
+.contenido {
+  padding: 60px 20px;
+  position: relative;
   z-index: 2;
-  pointer-events: none;
 }
 
-.brillos::before,
-.brillos::after {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background-image:
-    radial-gradient(circle, rgba(212,175,55,0.35) 2px, transparent 3px),
-    radial-gradient(circle, rgba(255,255,255,0.25) 1.5px, transparent 3px),
-    radial-gradient(circle, rgba(212,175,55,0.2) 1px, transparent 2px);
-  background-size: 120px 120px, 80px 80px, 60px 60px;
-  animation: brillosMove 30s linear infinite;
-}
-
-.brillos::after {
-  animation-duration: 45s;
-  opacity: 0.6;
-}
-
-@keyframes brillosMove {
-  from { transform: translate(0,0); }
-  to { transform: translate(-300px,-300px); }
-}
-
-/* ================= TITULOS ================= */
-.titulo-15 {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(6.5rem, 26vw, 12rem);
+h3 {
   color: #d4af37;
-  line-height: 1;
-  margin: 0;
-  animation: brilloTexto 4s ease-in-out infinite;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-@keyframes brilloTexto {
-  0%,100% {
-    text-shadow:
-      0 0 12px rgba(212,175,55,0.7),
-      0 0 40px rgba(212,175,55,0.4);
-  }
-  50% {
-    text-shadow:
-      0 0 25px rgba(212,175,55,1),
-      0 0 70px rgba(212,175,55,0.7);
-  }
+/* ================= SECCIÓN CONTADOR ================= */
+.esperamos {
+  padding: 40px 20px 60px;
+  position: relative;
+  z-index: 2;
 }
 
-.titulo-15::after {
-  content: "";
-  display: block;
-  width: 130px;
-  height: 2px;
-  margin: 10px auto;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-}
-
-.nombre {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-top: 10px;
-}
-
-.fecha {
-  margin-top: 18px;
-  font-size: 1.1rem;
-  letter-spacing: 6px;
-  opacity: 0.9;
+/* FRASE "FALTAN..." */
+.frase {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.6rem, 8vw, 4rem);
+  color: #d4af37;
+  margin-bottom: 25px;
 }
 
 /* ================= CONTADOR ================= */
-.contador { padding: 50px 20px; }
-
-.reloj {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.contador {
+  display: flex;
+  justify-content: center;
   gap: 12px;
-  max-width: 420px;
-  margin: auto;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-.reloj div {
-  background: rgba(255,255,255,0.1);
-  padding: 14px 8px;
-  border-radius: 18px;
+.contador .bloque {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #b89b5e;
+  border-radius: 16px;
+  min-width: 82px;
+  padding: 14px 10px;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
 
-.reloj span {
-  font-size: clamp(1.6rem, 6vw, 2.4rem);
-  color: #d4af37;
+/* NÚMEROS */
+.contador .bloque span {
+  display: block;
+  font-size: 32px;
+  font-weight: 600;
+  color: #3a2f1d;
+  line-height: 1.1;
 }
 
-/* ================= GALERIA ================= */
-.galeria { padding: 60px 20px; }
-
-.galeria h3 {
-  font-size: 2rem;
-  color: #d4af37;
+/* TEXTO DÍAS / HORAS */
+.contador .bloque small {
+  font-size: 12px;
+  color: #6b5a3a;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.carousel {
-  width: 100%;
-  max-width: 420px;
-  margin: auto;
-  overflow: hidden;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(212,175,55,0.3);
+/* MENSAJES */
+.mensaje-contador {
+  margin-top: 14px;
+  font-size: 18px;
+  color: #7a5c2e;
+  font-weight: 600;
 }
 
-.slides {
-  display: flex;
-  transition: transform 0.6s ease;
-}
-
-.slides img {
-  width: 100%;
-  flex-shrink: 0;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
-.dots { margin-top: 15px; }
-
-.dot {
-  width: 10px;
-  height: 10px;
-  background: #555;
-  border-radius: 50%;
+/* ================= BOTÓN MAPS ================= */
+.btn-maps {
   display: inline-block;
-  margin: 0 5px;
-}
-
-.dot.active { background: #d4af37; }
-
-/* ================= RSVP ================= */
-.rsvp {
-  background: linear-gradient(135deg, #000, #1a1a1a);
-  padding: 60px 20px;
-}
-
-.rsvp h3 {
-  font-size: 2rem;
-  color: #d4af37;
-}
-
-.rsvp form {
-  max-width: 420px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.rsvp input,
-.rsvp select,
-.rsvp textarea {
-  width: 100%;
-  padding: 14px;
-  border-radius: 30px;
-  border: none;
-  font-size: 1rem;
-}
-
-.rsvp button {
-  background: #d4af37;
+  margin-top: 25px;
+  padding: 14px 36px;
+  background: linear-gradient(145deg, #d4af37, #b8962e);
   color: #000;
-  font-size: 1.1rem;
-  padding: 14px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
+  font-weight: bold;
+  border-radius: 40px;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(212,175,55,0.5);
   transition: transform 0.3s ease;
 }
 
-.rsvp button:hover { transform: scale(1.05); }
-
-/* ================= PAGO ================= */
-.pago {
-  background: #111;
-  padding: 50px 20px;
+.btn-maps:hover {
+  transform: scale(1.05);
 }
 
-.pago h3 {
-  font-size: 2rem;
-  color: #d4af37;
-}
-
-.precio {
-  font-size: clamp(2rem, 8vw, 2.8rem);
-}
-
-.alias {
-  font-size: 1.2rem;
-  color: #d4af37;
-  word-break: break-word;
-}
-
-/* ================= MUSICA ================= */
-.music-player {
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
-  width: 55px;
-  height: 55px;
-  background: linear-gradient(145deg, #d4af37, #b8962e);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 20px rgba(212,175,55,0.6);
-  z-index: 999;
-  cursor: pointer;
-  animation: pulse 2s infinite;
-}
-
-.music-player span {
-  font-size: 22px;
-  color: #000;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 15px rgba(212,175,55,0.5); }
-  50% { box-shadow: 0 0 30px rgba(212,175,55,0.9); }
-  100% { box-shadow: 0 0 15px rgba(212,175,55,0.5); }
-}
-
-/* ================= MOBILE FINO ================= */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 480px) {
-  .hero-fondo::after { height: 70px; }
-  .reloj { gap: 8px; }
-  .brillos::before,
-  .brillos::after {
-    background-size: 160px 160px, 120px 120px, 90px 90px;
-    opacity: 0.5;
+  .contador {
+    gap: 8px;
   }
+
+  .contador .bloque {
+    min-width: 70px;
+    padding: 10px 8px;
+  }
+
+  .contador .bloque span {
+    font-size: 26px;
+  }
+
+  .frase {
+    font-size: 2.4rem;
+  }
+
+  .hero-fondo::after,
+  .fondo-liso::before {
+    height: 90px;
+  }
+}
+/* ================= FONDO LISO ================= */
+.fondo-liso {
+  background: url("img/fondoliso.jpeg") center / cover no-repeat;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* VELO OSCURO TOTAL */
+.fondo-liso::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ESTRELLAS LUMINOSAS */
+.fondo-liso::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 2px),
+    radial-gradient(circle, rgba(212,175,55,0.55) 1.5px, transparent 3px),
+    radial-gradient(circle, rgba(255,255,255,0.3) 2px, transparent 4px),
+    radial-gradient(circle, rgba(212,175,55,0.45) 2.5px, transparent 5px);
+
+  background-size:
+    120px 120px,
+    180px 180px,
+    260px 260px,
+    340px 340px;
+
+  background-position:
+    0 0,
+    80px 60px,
+    160px 120px,
+    240px 180px;
+
+  opacity: 0.9;
+}
+
+/* CONTENIDO SIEMPRE ARRIBA */
+.fondo-liso > * {
+  position: relative;
+  z-index: 2;
 }

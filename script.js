@@ -1,26 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ================== CONTADOR ================== */
-  const fechaEvento = new Date("2026-02-28T00:00:00").getTime();
+  const fechaEvento = new Date("2026-02-28T21:00:00").getTime();
 
-  setInterval(() => {
-    const ahora = new Date().getTime();
+  const diasEl = document.getElementById("dias");
+  const horasEl = document.getElementById("horas");
+  const minutosEl = document.getElementById("minutos");
+  const segundosEl = document.getElementById("segundos");
+  const mensajeEl = document.getElementById("mensaje-contador");
+  const contadorEl = document.getElementById("contador");
+
+  function actualizarContador() {
+    if (!diasEl || !horasEl || !minutosEl || !segundosEl) return;
+
+    const ahora = Date.now();
     const distancia = fechaEvento - ahora;
 
-    if (distancia <= 0) return;
+    if (distancia <= 0) {
+      contadorEl.style.display = "none";
+      mensajeEl.textContent = "🎉 ¡Ya estamos festejando! 🎉";
+      return;
+    }
 
-    document.getElementById("dias").innerText =
-      Math.floor(distancia / (1000 * 60 * 60 * 24));
+    const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((distancia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((distancia / (1000 * 60)) % 60);
+    const segundos = Math.floor((distancia / 1000) % 60);
 
-    document.getElementById("horas").innerText =
-      Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    diasEl.textContent = dias;
+    horasEl.textContent = horas;
+    minutosEl.textContent = minutos;
+    segundosEl.textContent = segundos;
 
-    document.getElementById("minutos").innerText =
-      Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+    mensajeEl.textContent =
+      dias === 1 ? "✨ Falta solo 1 día ✨" : "";
+  }
 
-    document.getElementById("segundos").innerText =
-      Math.floor((distancia % (1000 * 60)) / 1000);
-  }, 1000);
+  actualizarContador();
+  setInterval(actualizarContador, 1000);
 
   /* ================== CARRUSEL ================== */
   let index = 0;
@@ -48,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     slides.addEventListener("touchend", e => {
-      let endX = e.changedTouches[0].clientX;
+      const endX = e.changedTouches[0].clientX;
 
       if (startX - endX > 50) {
         index = (index + 1) % dots.length;
@@ -65,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector(".music-player");
 
   let reproduciendo = false;
-  audio.volume = 0;
+  if (audio) audio.volume = 0;
 
   function fadeIn() {
     let v = 0;
@@ -73,9 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (v < 1) {
         v += 0.05;
         audio.volume = v;
-      } else {
-        clearInterval(fade);
-      }
+      } else clearInterval(fade);
     }, 80);
   }
 
@@ -101,8 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
         icon.textContent = "❚❚";
         btn.classList.add("playing");
         reproduciendo = true;
-      }).catch(() => {
-        console.log("El navegador bloqueó el audio hasta interacción válida");
       });
     } else {
       fadeOut();
@@ -120,9 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reveals.forEach(el => {
       const elementTop = el.getBoundingClientRect().top;
-      const visiblePoint = 120;
-
-      if (elementTop < windowHeight - visiblePoint) {
+      if (elementTop < windowHeight - 120) {
         el.classList.add("visible");
       }
     });
@@ -131,14 +142,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", revealOnScroll);
   window.addEventListener("load", revealOnScroll);
 
-  /* ================== RSVP → GOOGLE SHEETS ================== */
+  /* ================== RSVP ================== */
   const form = document.getElementById("rsvp-form");
   const respuesta = document.getElementById("respuesta");
 
   if (form) {
     form.addEventListener("submit", e => {
       e.preventDefault();
-
       const data = new FormData(form);
 
       fetch("PEGAR_ACÁ_TU_URL_DE_GOOGLE_APPS_SCRIPT", {
@@ -146,11 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
         body: data
       })
       .then(() => {
-        respuesta.innerHTML = "✨ Gracias por confirmar ✨";
+        respuesta.textContent = "✨ Gracias por confirmar ✨";
         form.reset();
       })
       .catch(() => {
-        respuesta.innerHTML = "❌ Error al enviar. Intentá nuevamente.";
+        respuesta.textContent = "❌ Error al enviar. Intentá nuevamente.";
       });
     });
   }

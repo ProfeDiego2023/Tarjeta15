@@ -1,166 +1,117 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <title>Mis 15 ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación</title>
 
   <!-- FUENTES -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- ESTILOS -->
-
+  <!-- CSS -->
   <link rel="stylesheet" href="estilos.css">
 </head>
 
 <body>
 
-<!-- BOTÓN MÚSICA -->
+  <!-- CABECERA / FOTO PRINCIPAL -->
+  <section class="hero-fondo"></section>
 
-<button class="music-player" onclick="toggleMusic()" aria-label="Reproducir música">
-  <span id="music-icon">▶</span>
-</button>
+  <!-- CONTENIDO CON FONDO LISO -->
+  <main class="fondo-liso">
 
-<audio id="musica" loop>
-  <source src="music/AIR SUPPLY - SWEET DREAMS.mp3" type="audio/mpeg">
-  Tu navegador no soporta audio HTML5
-</audio>
+    <section class="contenido">
+      <h3>Te esperamos ✨</h3>
+      <p>
+        Una noche especial para compartir, celebrar y disfrutar juntos.
+      </p>
+    </section>
 
-<!-- HERO / CABECERA -->
+    <!-- CONTADOR -->
+    <section class="esperamos">
+      <p class="frase">Faltan...</p>
 
-<section class="hero hero-fondo">
-  <div class="overlay">
-    <h1 class="titulo-15">Mis 15</h1>
-    <h2 class="nombre">Florencia</h2>
-    <p class="fecha">28 · 02 · 2026</p>
-  </div>
+      <div id="contador" class="contador">
+        <div class="bloque">
+          <span id="dias">0</span>
+          <small>Días</small>
+        </div>
+        <div class="bloque">
+          <span id="horas">0</span>
+          <small>Horas</small>
+        </div>
+        <div class="bloque">
+          <span id="minutos">0</span>
+          <small>Min</small>
+        </div>
+        <div class="bloque">
+          <span id="segundos">0</span>
+          <small>Seg</small>
+        </div>
+      </div>
 
-  <!-- EFECTO BRILLOS -->
+      <p id="mensaje-contador" class="mensaje-contador"></p>
+    </section>
 
-  <div class="brillos" aria-hidden="true"></div>
-</section>
+    <!-- UBICACIÓN -->
+    <section class="contenido">
+      <h3>Ubicación</h3>
+      <p>
+        Club Social Aaron Castellanos<br>
+        Rivadavia 2078, Esperanza, Santa Fe
+      </p>
 
-<!-- CUENTA REGRESIVA -->
+      <a
+        class="btn-maps"
+        href="https://www.google.com/maps/search/?api=1&query=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
+        target="_blank"
+        rel="noopener">
+        Cómo llegar
+      </a>
+    </section>
 
-<section class="contador reveal">
-  <h3>Faltan</h3>
+  </main>
 
-  <div class="reloj">
-    <div><span id="dias">0</span><small>Días</small></div>
-    <div><span id="horas">0</span><small>Horas</small></div>
-    <div><span id="minutos">0</span><small>Min</small></div>
-    <div><span id="segundos">0</span><small>Seg</small></div>
-  </div>
-</section>
+  <!-- SCRIPT CONTADOR -->
+  <script>
+    (() => {
+      const fechaEvento = new Date("2026-02-28T21:00:00").getTime();
 
-<!-- GALERÍA -->
+      const diasEl = document.getElementById("dias");
+      const horasEl = document.getElementById("horas");
+      const minutosEl = document.getElementById("minutos");
+      const segundosEl = document.getElementById("segundos");
+      const mensajeEl = document.getElementById("mensaje-contador");
+      const contadorEl = document.getElementById("contador");
 
-<section class="galeria reveal fade-left">
-  <h3>Momentos ✨</h3>
+      function actualizar() {
+        const ahora = Date.now();
+        const diff = fechaEvento - ahora;
 
-  <div class="carousel">
-    <div class="slides">
-      <img src="img/15-anos-Jaysa__533__GDP5598_15-anos-quinceaneras-republica-dominicana-santo-domingo-zona-colonial_Greg-Dotel_3-1024x684.jpg" alt="Sesión de fotos de 15 años">
-      <img src="img/15-Anos-Stephanie__576__GDP6921_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_3-1024x684.jpg" alt="Fiesta de quince años">
-      <img src="img/15-Carismell_GDP3220_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_1-1024x684.jpg" alt="Vestido de quince años">
-    </div>
+        if (diff <= 0) {
+          contadorEl.style.display = "none";
+          mensajeEl.textContent = "🎉 ¡Ya estamos festejando! 🎉";
+          return;
+        }
 
-```
-<div class="dots">
-  <span class="dot active"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-</div>
-```
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutos = Math.floor((diff / (1000 * 60)) % 60);
+        const segundos = Math.floor((diff / 1000) % 60);
 
-  </div>
-</section>
+        diasEl.textContent = dias;
+        horasEl.textContent = horas;
+        minutosEl.textContent = minutos;
+        segundosEl.textContent = segundos;
 
-<!-- RSVP -->
+        mensajeEl.textContent = dias === 1 ? "✨ Falta solo 1 día ✨" : "";
+      }
 
-<section class="rsvp reveal fade-right">
-  <h3>Confirmación de Asistencia</h3>
-
-  <p class="costo">
-    Valor de la tarjeta: <strong>$25.000</strong>
-  </p>
-
-  <form id="rsvp-form">
-    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
-
-```
-<select name="asistencia" required>
-  <option value="">¿Vas a asistir?</option>
-  <option value="SI">Sí, asistiré</option>
-  <option value="NO">No podré asistir</option>
-</select>
-
-<select name="alimentacion">
-  <option value="Ninguna">Alimentación normal</option>
-  <option value="Vegana">Vegana</option>
-  <option value="Vegetariana">Vegetariana</option>
-  <option value="Celíaca">Celíaca / Sin TACC</option>
-  <option value="Otra">Otra</option>
-</select>
-
-<textarea name="mensaje" placeholder="Aclaraciones (opcional)"></textarea>
-
-<button type="submit">Confirmar</button>
-```
-
-  </form>
-
-  <p id="respuesta" role="status"></p>
-</section>
-
-<!-- PAGO -->
-
-<section class="pago reveal">
-  <h3>Valor de la Tarjeta</h3>
-
-  <p class="precio">$25.000</p>
-
-  <p class="alias">
-    Alias: <strong>FLORE.15.GALA</strong>
-  </p>
-
-  <p class="nota">
-    Confirmar asistencia luego de realizar el pago
-  </p>
-</section>
-
-<!-- UBICACIÓN -->
-
-<section class="ubicacion reveal">
-  <h3>Ubicación ✨</h3>
-
-  <p class="lugar">
-    Club Social Aaron Castellanos<br>
-    Rivadavia 2078, Esperanza, Santa Fe
-  </p>
-
-  <div class="mapa">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8198.896693112709!2d-60.93719950625688!3d-31.45129874698242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b513179860c6b5%3A0x21785d193f2b6aab!2sClub%20Social%20Aaron%20Castellanos!5e1!3m2!1ses-419!2sar!4v1768588845025!5m2!1ses-419!2sar" width="600" height="450" style="border:0;"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-<a
- class="btn-maps"
- href="https://www.google.com/maps/dir/?api=1&destination=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
- target="_blank"
- rel="noopener">
-Cómo llegar </a>
-
-</section>
-
-<script src="script.js"></script>
+      actualizar();
+      setInterval(actualizar, 1000);
+    })();
+  </script>
 
 </body>
 </html>
