@@ -1,220 +1,237 @@
 /* ================= BASE ================= */
 body {
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  color: #fff;
-  text-align: center;
-  overflow-x: hidden;
+margin: 0;
+font-family: 'Playfair Display', serif;
+color: #fff;
+text-align: center;
+overflow-x: hidden;
 }
 
 /* ================= CABECERA ================= */
 .hero-fondo {
-  min-height: 100svh;
-  background: url("img/cabecera.jpeg") center / cover no-repeat;
-  position: relative;
+min-height: 100svh;
+background: url("img/cabecera.jpeg") center / cover no-repeat;
+position: relative;
 }
 
-/* FUNDIDO SUAVE HACIA ABAJO */
-.hero-fondo::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 140px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.35) 50%,
-    rgba(0,0,0,0.75) 100%
-  );
-}
+/* ❌ QUITAMOS COMPLETAMENTE EL DIFUMINADO DE UNIÓN */
+/* (antes estaba con ::after) */
 
 /* ================= FONDO LISO ================= */
 .fondo-liso {
-  background: url("img/fondoliso.jpeg") center / cover no-repeat;
-  min-height: 100vh;
-  position: relative;
+position: relative;
+background: url("img/fondoliso.jpeg") center / cover no-repeat;
+min-height: 100vh;
+overflow: hidden;
 }
 
-/* FUNDIDO SUAVE DESDE ARRIBA */
-.fondo-liso::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 140px;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.35) 50%,
-    rgba(0,0,0,0.75) 100%
-  );
+/* VELO OSCURO SUAVE (parejo en todo el fondo) */
+.fondo-liso .velo {
+position: absolute;
+inset: 0;
+background: rgba(0, 0, 0, 0.28);
+z-index: 0;
+}
+
+/* ================= ESTRELLAS / ESFERAS ================= */
+.fondo-liso .estrellas {
+position: absolute;
+inset: 0;
+z-index: 1;
+pointer-events: none;
+
+/* MUCHAS CAPAS PARA MAYOR DENSIDAD */
+background-image:
+radial-gradient(circle, rgba(255,255,255,0.45) 1px, transparent 2px),
+radial-gradient(circle, rgba(212,175,55,0.55) 1.5px, transparent 3px),
+radial-gradient(circle, rgba(255,255,255,0.35) 2px, transparent 4px),
+radial-gradient(circle, rgba(212,175,55,0.45) 2.5px, transparent 5px),
+radial-gradient(circle, rgba(255,255,255,0.25) 3px, transparent 6px),
+radial-gradient(circle, rgba(212,175,55,0.35) 3.5px, transparent 7px);
+
+background-size:
+80px 80px,
+120px 120px,
+160px 160px,
+220px 220px,
+300px 300px,
+380px 380px;
+
+background-position:
+0 0,
+40px 60px,
+90px 120px,
+160px 200px,
+240px 280px,
+320px 360px;
+
+opacity: 0.95;
+}
+
+/* ASEGURA CONTENIDO ARRIBA */
+.fondo-liso > section {
+position: relative;
+z-index: 2;
 }
 
 /* ================= CONTENIDO ================= */
 .contenido {
-  padding: 60px 20px;
-  position: relative;
-  z-index: 2;
+padding: 60px 20px;
 }
 
 h3 {
-  color: #d4af37;
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-/* ================= SECCIÓN CONTADOR ================= */
-.esperamos {
-  padding: 40px 20px 60px;
-  position: relative;
-  z-index: 2;
-}
-
-/* FRASE "FALTAN..." */
-.frase {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(2.6rem, 8vw, 4rem);
-  color: #d4af37;
-  margin-bottom: 25px;
+color: #d4af37;
+font-size: 2rem;
+margin-bottom: 10px;
 }
 
 /* ================= CONTADOR ================= */
+.esperamos {
+padding: 40px 20px 60px;
+}
+
+.frase {
+font-family: 'Great Vibes', cursive;
+font-size: clamp(2.8rem, 9vw, 4.2rem);
+color: #d4af37;
+margin-bottom: 25px;
+}
+
+/* BLOQUES */
 .contador {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 10px;
+display: flex;
+justify-content: center;
+gap: 12px;
+flex-wrap: wrap;
 }
 
 .contador .bloque {
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #b89b5e;
-  border-radius: 16px;
-  min-width: 82px;
-  padding: 14px 10px;
-  text-align: center;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+background: rgba(255, 255, 255, 0.92);
+border: 2px solid #b89b5e;
+border-radius: 16px;
+min-width: 82px;
+padding: 14px 10px;
+box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
-/* NÚMEROS */
 .contador .bloque span {
-  display: block;
-  font-size: 32px;
-  font-weight: 600;
-  color: #3a2f1d;
-  line-height: 1.1;
+display: block;
+font-size: 32px;
+font-weight: 600;
+color: #3a2f1d;
 }
 
-/* TEXTO DÍAS / HORAS */
 .contador .bloque small {
-  font-size: 12px;
-  color: #6b5a3a;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+font-size: 12px;
+color: #6b5a3a;
+letter-spacing: 1px;
+text-transform: uppercase;
 }
 
-/* MENSAJES */
+/* MENSAJE */
 .mensaje-contador {
-  margin-top: 14px;
-  font-size: 18px;
-  color: #7a5c2e;
-  font-weight: 600;
+margin-top: 14px;
+font-size: 18px;
+color: #d4af37;
+font-weight: 600;
 }
 
 /* ================= BOTÓN MAPS ================= */
 .btn-maps {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 14px 36px;
-  background: linear-gradient(145deg, #d4af37, #b8962e);
-  color: #000;
-  font-weight: bold;
-  border-radius: 40px;
-  text-decoration: none;
-  box-shadow: 0 0 25px rgba(212,175,55,0.5);
-  transition: transform 0.3s ease;
+display: inline-block;
+margin-top: 25px;
+padding: 14px 36px;
+background: linear-gradient(145deg, #d4af37, #b8962e);
+color: #000;
+font-weight: bold;
+border-radius: 40px;
+text-decoration: none;
+box-shadow: 0 0 22px rgba(212,175,55,0.45);
+transition: transform 0.3s ease;
 }
 
 .btn-maps:hover {
-  transform: scale(1.05);
+transform: scale(1.05);
 }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 480px) {
-  .contador {
-    gap: 8px;
-  }
-
-  .contador .bloque {
-    min-width: 70px;
-    padding: 10px 8px;
-  }
-
-  .contador .bloque span {
-    font-size: 26px;
-  }
-
-  .frase {
-    font-size: 2.4rem;
-  }
-
-  .hero-fondo::after,
-  .fondo-liso::before {
-    height: 90px;
-  }
-}
-/* ================= FONDO LISO ================= */
-.fondo-liso {
-  background: url("img/fondoliso.jpeg") center / cover no-repeat;
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
+.contador {
+gap: 8px;
 }
 
-/* VELO OSCURO TOTAL */
-.fondo-liso::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: rgba(0, 0, 0, 0.35);
+.contador .bloque {
+min-width: 70px;
+padding: 10px 8px;
 }
 
-/* ESTRELLAS LUMINOSAS */
-.fondo-liso::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 2px),
-    radial-gradient(circle, rgba(212,175,55,0.55) 1.5px, transparent 3px),
-    radial-gradient(circle, rgba(255,255,255,0.3) 2px, transparent 4px),
-    radial-gradient(circle, rgba(212,175,55,0.45) 2.5px, transparent 5px);
-
-  background-size:
-    120px 120px,
-    180px 180px,
-    260px 260px,
-    340px 340px;
-
-  background-position:
-    0 0,
-    80px 60px,
-    160px 120px,
-    240px 180px;
-
-  opacity: 0.9;
+.contador .bloque span {
+font-size: 26px;
 }
 
-/* CONTENIDO SIEMPRE ARRIBA */
-.fondo-liso > * {
-  position: relative;
-  z-index: 2;
+.frase {
+font-size: 2.5rem;
+}
+}
+/* ================= DORADOS MÁS PROTAGONISTAS ================= */
+
+/* TITULOS */
+h3 {
+  color: #f2d98c; /* dorado más claro */
+  text-shadow:
+    0 0 6px rgba(242, 217, 140, 0.55),
+    0 0 14px rgba(212, 175, 55, 0.35);
+}
+
+/* FRASE "FALTAN..." */
+.frase {
+  color: #f6e3a1;
+  text-shadow:
+    0 0 10px rgba(246, 227, 161, 0.65),
+    0 0 22px rgba(212, 175, 55, 0.45);
+}
+
+/* MENSAJE DEL CONTADOR */
+.mensaje-contador {
+  color: #f4d77e;
+  text-shadow:
+    0 0 6px rgba(244, 215, 126, 0.6);
+}
+
+/* TEXTOS IMPORTANTES (ubicación, descripciones) */
+.contenido p {
+  color: #f7f0dc;
+}
+
+/* BOTÓN MAPS MÁS VIVO */
+.btn-maps {
+  background: linear-gradient(145deg, #f5dc8a, #cfa234);
+  box-shadow:
+    0 0 18px rgba(245, 220, 138, 0.6),
+    0 0 36px rgba(212, 175, 55, 0.35);
+}
+/* ================= CONTADOR RESPONSIVO REAL ================= */
+
+.contador {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* siempre 4 en línea */
+  gap: clamp(6px, 2vw, 12px);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.contador .bloque {
+  min-width: 0; /* CLAVE para que pueda achicarse */
+  padding: clamp(8px, 2vw, 14px);
+  border-radius: 14px;
+}
+
+/* NÚMEROS */
+.contador .bloque span {
+  font-size: clamp(20px, 5vw, 32px);
+}
+
+/* TEXTO */
+.contador .bloque small {
+  font-size: clamp(10px, 2.5vw, 12px);
 }
