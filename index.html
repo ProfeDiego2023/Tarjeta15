@@ -31,7 +31,7 @@
 
 
   <!-- CUENTA REGRESIVA -->
-  <section class="contador">
+  <section class="contador reveal ">
     <h3>Faltan</h3>
     <div class="reloj">
       <div><span id="dias">0</span><small>Días</small></div>
@@ -41,7 +41,7 @@
     </div>
   </section>
 <!-- CARRUSEL DE IMÁGENES -->
-<section class="galeria">
+<section class="galeria reveal fade-left">
   <h3>Momentos ✨</h3>
 
   <div class="carousel">
@@ -57,6 +57,37 @@
       <span class="dot"></span>
     </div>
   </div>
+</section>
+<section class="rsvp reveal fade-right">
+  <h3>Confirmación de Asistencia</h3>
+
+  <p class="costo">
+    Valor de la tarjeta: <strong>$25.000</strong>
+  </p>
+
+  <form id="rsvp-form">
+    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+
+    <select name="asistencia" required>
+      <option value="">¿Vas a asistir?</option>
+      <option value="SI">Sí, asistiré</option>
+      <option value="NO">No podré asistir</option>
+    </select>
+
+    <select name="alimentacion">
+      <option value="Ninguna">Alimentación normal</option>
+      <option value="Vegana">Vegana</option>
+      <option value="Vegetariana">Vegetariana</option>
+      <option value="Celíaca">Celíaca / Sin TACC</option>
+      <option value="Otra">Otra</option>
+    </select>
+
+    <textarea name="mensaje" placeholder="Aclaraciones (opcional)"></textarea>
+
+    <button type="submit">Confirmar</button>
+  </form>
+
+  <p id="respuesta"></p>
 </section>
 
 <!-- UBICACIÓN -->

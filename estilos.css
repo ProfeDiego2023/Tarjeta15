@@ -5,6 +5,32 @@ body {
   color: #fff;
   text-align: center;
 }
+/* ESTADO INICIAL (OCULTO) */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.98);
+  transition: all 1.2s ease;
+}
+
+/* CUANDO SE VE */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* VARIANTES */
+.reveal.fade-left {
+  transform: translateX(-60px);
+}
+
+.reveal.fade-right {
+  transform: translateX(60px);
+}
+
+.reveal.fade-left.visible,
+.reveal.fade-right.visible {
+  transform: translateX(0);
+}
 
 .hero {
   height: 100vh;
@@ -281,4 +307,84 @@ body {
   to {
     transform: translateY(-300px) translateX(-300px);
   }
+}
+.rsvp {
+  background: linear-gradient(135deg, #000, #1a1a1a);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.rsvp h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #d4af37;
+  margin-bottom: 15px;
+}
+
+.costo {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.rsvp form {
+  max-width: 420px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rsvp input,
+.rsvp select,
+.rsvp textarea {
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+}
+
+.rsvp textarea {
+  resize: none;
+}
+
+.rsvp button {
+  background: #d4af37;
+  color: #000;
+  font-size: 1.1rem;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.rsvp button:hover {
+  transform: scale(1.05);
+}
+.pago {
+  background: #111;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.pago h3 {
+  color: #d4af37;
+  font-size: 2rem;
+}
+
+.precio {
+  font-size: 2.5rem;
+  color: #fff;
+  margin: 15px 0;
+}
+
+.alias {
+  font-size: 1.3rem;
+  color: #d4af37;
+}
+
+.nota {
+  color: #ccc;
+  font-size: 0.9rem;
 }

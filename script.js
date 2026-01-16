@@ -116,3 +116,40 @@ window.toggleMusic = function () {
 
 
 });
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+
+  reveals.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    const visiblePoint = 120;
+
+    if (elementTop < windowHeight - visiblePoint) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+const form = document.getElementById("rsvp-form");
+const respuesta = document.getElementById("respuesta");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  fetch("PEGAR_ACÁ_TU_URL_DE_GOOGLE_APPS_SCRIPT", {
+    method: "POST",
+    body: data
+  })
+  .then(() => {
+    respuesta.innerHTML = "✨ Gracias por confirmar ✨";
+    form.reset();
+  })
+  .catch(() => {
+    respuesta.innerHTML = "❌ Error al enviar. Intentá nuevamente.";
+  });
+});
