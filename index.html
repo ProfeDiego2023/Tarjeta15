@@ -1,63 +1,86 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
   <title>Mis 15 ✨</title>
 
+  <!-- FUENTES -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- ESTILOS -->
+
   <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
+
 <!-- BOTÓN MÚSICA -->
-<div class="music-player" onclick="toggleMusic()">
+
+<button class="music-player" onclick="toggleMusic()" aria-label="Reproducir música">
   <span id="music-icon">▶</span>
-</div>
+</button>
 
 <audio id="musica" loop>
   <source src="music/AIR SUPPLY - SWEET DREAMS.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio HTML5
 </audio>
 
-  <!-- BIENVENIDA -->
+<!-- HERO / CABECERA -->
+
 <section class="hero hero-fondo">
-  <div class="overlay">    
+  <div class="overlay">
     <h1 class="titulo-15">Mis 15</h1>
     <h2 class="nombre">Florencia</h2>
     <p class="fecha">28 · 02 · 2026</p>
   </div>
-  <div class="brillos"></div>
+
+  <!-- EFECTO BRILLOS -->
+
+  <div class="brillos" aria-hidden="true"></div>
 </section>
 
+<!-- CUENTA REGRESIVA -->
 
-  <!-- CUENTA REGRESIVA -->
-  <section class="contador reveal ">
-    <h3>Faltan</h3>
-    <div class="reloj">
-      <div><span id="dias">0</span><small>Días</small></div>
-      <div><span id="horas">0</span><small>Horas</small></div>
-      <div><span id="minutos">0</span><small>Min</small></div>
-      <div><span id="segundos">0</span><small>Seg</small></div>
-    </div>
-  </section>
-<!-- CARRUSEL DE IMÁGENES -->
+<section class="contador reveal">
+  <h3>Faltan</h3>
+
+  <div class="reloj">
+    <div><span id="dias">0</span><small>Días</small></div>
+    <div><span id="horas">0</span><small>Horas</small></div>
+    <div><span id="minutos">0</span><small>Min</small></div>
+    <div><span id="segundos">0</span><small>Seg</small></div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+
 <section class="galeria reveal fade-left">
   <h3>Momentos ✨</h3>
 
   <div class="carousel">
     <div class="slides">
-      <img src="img/15-anos-Jaysa__533__GDP5598_15-anos-quinceaneras-republica-dominicana-santo-domingo-zona-colonial_Greg-Dotel_3-1024x684.jpg">
-      <img src="img/15-Anos-Stephanie__576__GDP6921_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_3-1024x684.jpg">
-      <img src="img/15-Carismell_GDP3220_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_1-1024x684.jpg">
+      <img src="img/15-anos-Jaysa__533__GDP5598_15-anos-quinceaneras-republica-dominicana-santo-domingo-zona-colonial_Greg-Dotel_3-1024x684.jpg" alt="Sesión de fotos de 15 años">
+      <img src="img/15-Anos-Stephanie__576__GDP6921_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_3-1024x684.jpg" alt="Fiesta de quince años">
+      <img src="img/15-Carismell_GDP3220_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_1-1024x684.jpg" alt="Vestido de quince años">
     </div>
 
-    <div class="dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+```
+<div class="dots">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+```
+
   </div>
 </section>
+
+<!-- RSVP -->
+
 <section class="rsvp reveal fade-right">
   <h3>Confirmación de Asistencia</h3>
 
@@ -68,27 +91,33 @@
   <form id="rsvp-form">
     <input type="text" name="nombre" placeholder="Tu nombre completo" required>
 
-    <select name="asistencia" required>
-      <option value="">¿Vas a asistir?</option>
-      <option value="SI">Sí, asistiré</option>
-      <option value="NO">No podré asistir</option>
-    </select>
+```
+<select name="asistencia" required>
+  <option value="">¿Vas a asistir?</option>
+  <option value="SI">Sí, asistiré</option>
+  <option value="NO">No podré asistir</option>
+</select>
 
-    <select name="alimentacion">
-      <option value="Ninguna">Alimentación normal</option>
-      <option value="Vegana">Vegana</option>
-      <option value="Vegetariana">Vegetariana</option>
-      <option value="Celíaca">Celíaca / Sin TACC</option>
-      <option value="Otra">Otra</option>
-    </select>
+<select name="alimentacion">
+  <option value="Ninguna">Alimentación normal</option>
+  <option value="Vegana">Vegana</option>
+  <option value="Vegetariana">Vegetariana</option>
+  <option value="Celíaca">Celíaca / Sin TACC</option>
+  <option value="Otra">Otra</option>
+</select>
 
-    <textarea name="mensaje" placeholder="Aclaraciones (opcional)"></textarea>
+<textarea name="mensaje" placeholder="Aclaraciones (opcional)"></textarea>
 
-    <button type="submit">Confirmar</button>
+<button type="submit">Confirmar</button>
+```
+
   </form>
 
-  <p id="respuesta"></p>
+  <p id="respuesta" role="status"></p>
 </section>
+
+<!-- PAGO -->
+
 <section class="pago reveal">
   <h3>Valor de la Tarjeta</h3>
 
@@ -104,32 +133,34 @@
 </section>
 
 <!-- UBICACIÓN -->
-<section class="ubicacion">
+
+<section class="ubicacion reveal">
   <h3>Ubicación ✨</h3>
 
   <p class="lugar">
     Club Social Aaron Castellanos<br>
-    Rivadavia 2078, S3080 Esperanza, Santa Fe
+    Rivadavia 2078, Esperanza, Santa Fe
   </p>
 
   <div class="mapa">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4086.225933301807!2d-60.930798423738814!3d-31.449622974246488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b513179860c6b5%3A0x21785d193f2b6aab!2sClub%20Social%20Aaron%20Castellanos!5e1!3m2!1ses!2sar!4v1768514349203!5m2!1ses!2sar" width="600" height="450" style="border:0;"
-      allowfullscreen=""
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8198.896693112709!2d-60.93719950625688!3d-31.45129874698242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b513179860c6b5%3A0x21785d193f2b6aab!2sClub%20Social%20Aaron%20Castellanos!5e1!3m2!1ses-419!2sar!4v1768588845025!5m2!1ses-419!2sar" width="600" height="450" style="border:0;"
       loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen>
     </iframe>
   </div>
 
-  <a
-    class="btn-maps"
-    href="https://www.google.com/maps/dir/?api=1&destination=Salón+Glamour+Av.+Siempre+Viva+123+Buenos+Aires"
-    target="_blank">
-    Cómo llegar
-  </a>
+<a
+ class="btn-maps"
+ href="https://www.google.com/maps/dir/?api=1&destination=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
+ target="_blank"
+ rel="noopener">
+Cómo llegar </a>
+
 </section>
 
+<script src="script.js"></script>
 
-  <script src="script.js"></script>
 </body>
 </html>

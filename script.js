@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function mostrarSlide(i) {
       index = i;
       slides.style.transform = `translateX(-${index * 100}%)`;
-
       dots.forEach(dot => dot.classList.remove("active"));
       dots[index].classList.add("active");
     }
@@ -60,96 +59,100 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  
- /* ================== MÚSICA PRO ================== */
-const audio = document.getElementById("musica");
-const icon = document.getElementById("music-icon");
-const btn = document.getElementById("musicBtn");
+  /* ================== MÚSICA ================== */
+  const audio = document.getElementById("musica");
+  const icon = document.getElementById("music-icon");
+  const btn = document.querySelector(".music-player");
 
-let reproduciendo = false;
-audio.volume = 0;
+  let reproduciendo = false;
+  audio.volume = 0;
 
-function fadeIn() {
-  let v = 0;
-  const fade = setInterval(() => {
-    if (v < 1) {
-      v += 0.05;
-      audio.volume = v;
-    } else {
-      clearInterval(fade);
-    }
-  }, 80);
-}
-
-function fadeOut() {
-  let v = audio.volume;
-  const fade = setInterval(() => {
-    if (v > 0) {
-      v -= 0.05;
-      audio.volume = v;
-    } else {
-      audio.pause();
-      clearInterval(fade);
-    }
-  }, 80);
-}
-
-window.toggleMusic = function () {
-  if (!audio) return;
-
-  if (!reproduciendo) {
-    audio.play().then(() => {
-      fadeIn();
-      icon.textContent = "❚❚";
-      btn.classList.add("playing");
-      reproduciendo = true;
-    }).catch(() => {
-      console.log("El navegador bloqueó el audio hasta interacción válida");
-    });
-  } else {
-    fadeOut();
-    icon.textContent = "▶";
-    btn.classList.remove("playing");
-    reproduciendo = false;
+  function fadeIn() {
+    let v = 0;
+    const fade = setInterval(() => {
+      if (v < 1) {
+        v += 0.05;
+        audio.volume = v;
+      } else {
+        clearInterval(fade);
+      }
+    }, 80);
   }
-};
 
+  function fadeOut() {
+    let v = audio.volume;
+    const fade = setInterval(() => {
+      if (v > 0) {
+        v -= 0.05;
+        audio.volume = v;
+      } else {
+        audio.pause();
+        clearInterval(fade);
+      }
+    }, 80);
+  }
 
-});
-const reveals = document.querySelectorAll(".reveal");
+  window.toggleMusic = function () {
+    if (!audio) return;
 
-function revealOnScroll() {
-  const windowHeight = window.innerHeight;
-
-  reveals.forEach(el => {
-    const elementTop = el.getBoundingClientRect().top;
-    const visiblePoint = 120;
-
-    if (elementTop < windowHeight - visiblePoint) {
-      el.classList.add("visible");
+    if (!reproduciendo) {
+      audio.play().then(() => {
+        fadeIn();
+        icon.textContent = "❚❚";
+        btn.classList.add("playing");
+        reproduciendo = true;
+      }).catch(() => {
+        console.log("El navegador bloqueó el audio hasta interacción válida");
+      });
+    } else {
+      fadeOut();
+      icon.textContent = "▶";
+      btn.classList.remove("playing");
+      reproduciendo = false;
     }
-  });
-}
+  };
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
-const form = document.getElementById("rsvp-form");
-const respuesta = document.getElementById("respuesta");
+  /* ================== REVEAL ================== */
+  const reveals = document.querySelectorAll(".reveal");
 
-form.addEventListener("submit", e => {
-  e.preventDefault();
+  function revealOnScroll() {
+    const windowHeight = window.innerHeight;
 
-  const data = new FormData(form);
+    reveals.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+      const visiblePoint = 120;
 
-  fetch("PEGAR_ACÁ_TU_URL_DE_GOOGLE_APPS_SCRIPT", {
-    method: "POST",
-    body: data
-  })
-  .then(() => {
-    respuesta.innerHTML = "✨ Gracias por confirmar ✨";
-    form.reset();
-  })
-  .catch(() => {
-    respuesta.innerHTML = "❌ Error al enviar. Intentá nuevamente.";
-  });
+      if (elementTop < windowHeight - visiblePoint) {
+        el.classList.add("visible");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+
+  /* ================== RSVP → GOOGLE SHEETS ================== */
+  const form = document.getElementById("rsvp-form");
+  const respuesta = document.getElementById("respuesta");
+
+  if (form) {
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+
+      fetch("PEGAR_ACÁ_TU_URL_DE_GOOGLE_APPS_SCRIPT", {
+        method: "POST",
+        body: data
+      })
+      .then(() => {
+        respuesta.innerHTML = "✨ Gracias por confirmar ✨";
+        form.reset();
+      })
+      .catch(() => {
+        respuesta.innerHTML = "❌ Error al enviar. Intentá nuevamente.";
+      });
+    });
+  }
+
 });
