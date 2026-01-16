@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <title>Mis 15 ✨</title>
+
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<!-- BOTÓN MÚSICA -->
+<div class="music-player" onclick="toggleMusic()">
+  <span id="music-icon">▶</span>
+</div>
+
+<audio id="musica" loop>
+  <source src="music/AIR SUPPLY - SWEET DREAMS.mp3" type="audio/mpeg">
+</audio>
+
+  <!-- BIENVENIDA -->
+<section class="hero hero-fondo">
+  <div class="overlay">    
+    <h1 class="titulo-15">Mis 15</h1>
+    <h2 class="nombre">Florencia</h2>
+    <p class="fecha">28 · 02 · 2026</p>
+  </div>
+  <div class="brillos"></div>
+</section>
+
+
+  <!-- CUENTA REGRESIVA -->
+  <section class="contador">
+    <h3>Faltan</h3>
+    <div class="reloj">
+      <div><span id="dias">0</span><small>Días</small></div>
+      <div><span id="horas">0</span><small>Horas</small></div>
+      <div><span id="minutos">0</span><small>Min</small></div>
+      <div><span id="segundos">0</span><small>Seg</small></div>
+    </div>
+  </section>
+<!-- CARRUSEL DE IMÁGENES -->
+<section class="galeria">
+  <h3>Momentos ✨</h3>
+
+  <div class="carousel">
+    <div class="slides">
+      <img src="img/15-anos-Jaysa__533__GDP5598_15-anos-quinceaneras-republica-dominicana-santo-domingo-zona-colonial_Greg-Dotel_3-1024x684.jpg">
+      <img src="img/15-Anos-Stephanie__576__GDP6921_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_3-1024x684.jpg">
+      <img src="img/15-Carismell_GDP3220_15-anos-jardin-botanico-quinceaneras-republica-dominicana-santo-domingo_Greg-Dotel_1-1024x684.jpg">
+    </div>
+
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section class="ubicacion">
+  <h3>Ubicación ✨</h3>
+
+  <p class="lugar">
+    Club Social Aaron Castellanos<br>
+    Rivadavia 2078, S3080 Esperanza, Santa Fe
+  </p>
+
+  <div class="mapa">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4086.225933301807!2d-60.930798423738814!3d-31.449622974246488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b513179860c6b5%3A0x21785d193f2b6aab!2sClub%20Social%20Aaron%20Castellanos!5e1!3m2!1ses!2sar!4v1768514349203!5m2!1ses!2sar" width="600" height="450" style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <a
+    class="btn-maps"
+    href="https://www.google.com/maps/dir/?api=1&destination=Salón+Glamour+Av.+Siempre+Viva+123+Buenos+Aires"
+    target="_blank">
+    Cómo llegar
+  </a>
+</section>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
