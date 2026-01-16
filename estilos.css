@@ -33,11 +33,22 @@ body {
 }
 
 .hero {
-  height: 100vh;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.overlay {
+  min-height: 100vh;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
+
 
 .hero h1 {
   font-size: 3em;
@@ -183,17 +194,16 @@ body {
   border-radius: 100% 100% 0 0;
 }
 .titulo-15 {
-    animation: aparecer 1.8s ease-out forwards;
-     font-family: 'Great Vibes', cursive;
-  font-size: clamp(8rem, 22vw, 12rem);
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(6rem, 22vw, 12rem);
   color: #d4af37;
   text-shadow:
-    0 0 20px rgba(212,175,55,0.8),
-    0 0 60px rgba(212,175,55,0.5);
+    0 0 15px rgba(212,175,55,0.8),
+    0 0 50px rgba(212,175,55,0.4);
   margin: 0;
-  letter-spacing: 8px;
-  line-height: 0.95;
+  line-height: 1;
 }
+
 
 .nombre {
   font-family: 'Playfair Display', serif;
@@ -396,4 +406,79 @@ body {
 
 .confirmado {
   animation: glow 1.5s ease;
+}
+.reloj {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.reloj div {
+  background: rgba(255,255,255,0.1);
+  padding: 14px 8px;
+  border-radius: 18px;
+}
+
+.reloj span {
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+}
+.carousel {
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slides img {
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.rsvp form {
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.rsvp input,
+.rsvp select,
+.rsvp textarea {
+  width: 100%;
+  font-size: 1rem;
+}
+.precio {
+  font-size: clamp(2rem, 8vw, 2.8rem);
+}
+
+.alias {
+  word-break: break-word;
+}
+.music-player {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  font-size: 1.3rem;
+}
+@media (max-width: 360px) {
+  .titulo-15 {
+    font-size: 6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .rsvp,
+  .pago {
+    padding: 80px 40px;
+  }
 }
