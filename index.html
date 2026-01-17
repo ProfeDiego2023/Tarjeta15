@@ -12,14 +12,14 @@
   <!-- CSS -->
   <link rel="stylesheet" href="estilos.css">
 </head>
-
 <body>
 
-  <!-- CABECERA / FOTO PRINCIPAL (UNA SOLA VEZ) -->
+  <!-- CABECERA / FOTO PRINCIPAL -->
   <section class="hero-fondo"></section>
 
   <!-- LÍNEA DORADA -->
   <div class="linea-dorada"></div>
+
 
   <!-- FONDO LISO CON TODO EL CONTENIDO -->
   <section class="fondo-liso">
@@ -27,13 +27,18 @@
     <div class="estrellas"></div>
 
     <!-- TEXTO -->
-    <section class="contenido">
-      <h3>Te esperamos ✨</h3>
+   <section class="contenido">
+      <h3 class="titulo-seccion">Te esperamos ✨</h3>
       <p>Una noche especial para compartir, celebrar y disfrutar juntos.</p>
+
+      <div class="separador-linea"></div>
     </section>
+
 
     <!-- CONTADOR -->
     <section class="esperamos">
+      <div class="separador-linea"></div>
+      <img src="img/reloj.png" alt="Reloj" class="icono-reloj">
       <p class="frase">Faltan...</p>
 
       <div id="contador" class="contador">
@@ -59,18 +64,18 @@
     </section>
 
     <!-- UBICACIÓN -->
-    <section class="contenido">
-      <h3>Ubicación</h3>
+    <section class="contenido ubicacion">
+      <img src="img/ubicacion.png" alt="Icono de ubicación" class="icono-ubicacion">
+      <h3 class="titulo-seccion">Ubicación</h3>
       <p>
         Club Social Aarón Castellanos<br>
         Rivadavia 2078, Esperanza, Santa Fe
       </p>
-
       <a
         class="btn-maps"
         href="https://www.google.com/maps/search/?api=1&query=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
         target="_blank"
-        rel="noopener">
+        rel="noopener noreferrer">
         Cómo llegar
       </a>
     </section>
@@ -105,11 +110,15 @@
         const segundos = Math.floor((diff / 1000) % 60);
 
         diasEl.textContent = dias;
-        horasEl.textContent = horas;
-        minutosEl.textContent = minutos;
-        segundosEl.textContent = segundos;
+        horasEl.textContent = horas.toString().padStart(2, '0');
+        minutosEl.textContent = minutos.toString().padStart(2, '0');
+        segundosEl.textContent = segundos.toString().padStart(2, '0');
 
-        mensajeEl.textContent = dias === 1 ? "✨ Falta solo 1 día ✨" : "";
+        if (dias === 1) {
+          mensajeEl.textContent = "✨ Falta solo 1 día ✨";
+        } else {
+          mensajeEl.textContent = "";
+        }
       }
 
       actualizar();

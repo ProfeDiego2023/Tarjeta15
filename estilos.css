@@ -1,259 +1,274 @@
 /* ================= BASE ================= */
 body {
-margin: 0;
-font-family: 'Playfair Display', serif;
-color: #fff;
-text-align: center;
-overflow-x: hidden;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  text-align: center;
+  overflow-x: hidden;
 }
 
 /* ================= CABECERA ================= */
 .hero-fondo {
-min-height: 100svh;
-background: url("img/cabecera.jpeg") center / cover no-repeat;
-position: relative;
-}
-
-/* ================= LINEA DORADA ENTRE FONDOS ================= */
-.linea-dorada {
-  width: 100%;
-  height: 180px; /* altura visual */
-  background-image: url("img/lineadorada4.png");
-  background-repeat: repeat-x;
-  background-position: center;
-  background-size: 100% 100%;
+  min-height: 100svh;
+  background: url("img/cabecera.jpeg") center / cover no-repeat;
   position: relative;
-  z-index: 5;
-  margin-top: -45px;   /* se superpone a la cabecera */
-  margin-bottom: -45px;/* se superpone al fondo liso */
+  z-index: 1;
 }
 
-/* Ajuste móvil */
-@media (max-width: 480px) {
-  .linea-dorada {
-    height: 60px;
-    margin-top: -30px;
-    margin-bottom: -30px;
-  }
+/* ================= UNION ENTRE FONDOS (LÍNEA + IMAGEN) ================= */
+.linea-dorada {
+  position: relative;
+  width: 100vw;
+  height: 42px; /* controla el área total */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  pointer-events: none;
+
+  /* superposición entre fondos */
+  margin-top: -21px;
+  margin-bottom: -21px;
 }
+.linea-dorada::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 8px; /* delicada pero visible */
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    #f6e3a1,
+    #d4af37,
+    #f6e3a1,
+    transparent
+  );
+
+  transform: translateY(-50%);
+  opacity: 0.9;
+}
+.linea-dorada::after {
+  content: "";
+  position: absolute;
+
+  /* ⬆️ la subimos un poco */
+  top: -11px;       /* ajustá este valor si querés más/menos */
+  left: 0;
+  right: 0;
+  bottom: auto;
+
+  height: 100%;
+
+  background-image: url("img/lineafinal.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40% auto;
+
+  filter:
+    brightness(0) saturate(100%)
+    invert(73%) sepia(42%) saturate(520%)
+    hue-rotate(7deg) brightness(96%) contrast(92%)
+    drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+
+  opacity: 0.95;
+}
+
+/* ================= SEPARADOR CON LINEAFINAL (CONTROL TOTAL) ================= */
+.separador-linea {
+  width: 100%;
+  height: 30px;              /* MÁS CHICA */
+  margin: 18px 0;
+
+  background-image: url("img/lineafinal.png");
+  background-repeat: no-repeat !important; /* 🔒 NO SE REPITE */
+  background-position: center;
+  background-size: contain;  /* 🔒 NO SE ESTIRA */
+
+  filter:
+    brightness(0) saturate(100%)
+    invert(73%) sepia(42%) saturate(520%)
+    hue-rotate(7deg) brightness(96%) contrast(92%)
+    drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+
+  opacity: 0.95;
+}
+
 
 
 /* ================= FONDO LISO ================= */
 .fondo-liso {
-position: relative;
-background: url("img/fondoliso.jpeg") center / cover no-repeat;
-min-height: 100vh;
-overflow: hidden;
+  position: relative;
+  background: url("img/fondoliso.jpeg") center / cover no-repeat;
+  min-height: 100vh;
+  overflow: hidden;
+  z-index: 2;
 }
 
-/* VELO OSCURO SUAVE (parejo en todo el fondo) */
+/* VELO OSCURO */
 .fondo-liso .velo {
-position: absolute;
-inset: 0;
-background: rgba(0, 0, 0, 0.28);
-z-index: 0;
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 0;
 }
 
-/* ================= ESTRELLAS / ESFERAS ================= */
+/* ================= ESTRELLAS ================= */
 .fondo-liso .estrellas {
-position: absolute;
-inset: 0;
-z-index: 1;
-pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 
-/* MUCHAS CAPAS PARA MAYOR DENSIDAD */
-background-image:
-radial-gradient(circle, rgba(255,255,255,0.45) 1px, transparent 2px),
-radial-gradient(circle, rgba(212,175,55,0.55) 1.5px, transparent 3px),
-radial-gradient(circle, rgba(255,255,255,0.35) 2px, transparent 4px),
-radial-gradient(circle, rgba(212,175,55,0.45) 2.5px, transparent 5px),
-radial-gradient(circle, rgba(255,255,255,0.25) 3px, transparent 6px),
-radial-gradient(circle, rgba(212,175,55,0.35) 3.5px, transparent 7px);
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.45) 1px, transparent 2px),
+    radial-gradient(circle, rgba(212,175,55,0.55) 1.5px, transparent 3px),
+    radial-gradient(circle, rgba(255,255,255,0.35) 2px, transparent 4px),
+    radial-gradient(circle, rgba(212,175,55,0.45) 2.5px, transparent 5px),
+    radial-gradient(circle, rgba(255,255,255,0.25) 3px, transparent 6px);
 
-background-size:
-80px 80px,
-120px 120px,
-160px 160px,
-220px 220px,
-300px 300px,
-380px 380px;
+  background-size:
+    70px 70px,
+    110px 110px,
+    160px 160px,
+    230px 230px,
+    320px 320px;
 
-background-position:
-0 0,
-40px 60px,
-90px 120px,
-160px 200px,
-240px 280px,
-320px 360px;
-
-opacity: 0.95;
+  opacity: 0.95;
 }
 
-/* ASEGURA CONTENIDO ARRIBA */
+/* CONTENIDO ARRIBA */
 .fondo-liso > section {
-position: relative;
-z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
-/* ================= CONTENIDO ================= */
+/* ================= TITULOS UNIFICADOS ================= */
+/* Te esperamos / Faltan... / Ubicación */
+.titulo-seccion,
+.frase {
+  font-family: 'Great Vibes', serif;
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: 1px;
+  
+
+  color: #f6e3a1;
+  margin: 18px 0;
+  text-align: center;
+
+  text-shadow:
+    0 0 8px rgba(246, 227, 161, 0.6),
+    0 0 18px rgba(212, 175, 55, 0.4);
+}
+
+/* ================= TEXTO ================= */
 .contenido {
-padding: 60px 20px;
+  padding: 60px 20px 40px;
 }
 
-h3 {
-  font-family: 'Great Vibes', cursive;
-color: #d4af37;
-font-size: clamp(2.8rem, 9vw, 4.2rem);
-margin-bottom: 10px;
+.contenido p {
+  color: #f7f0dc;
+  font-size: 1.05rem;
+  max-width: 620px;
+  margin: 0 auto;
 }
 
 /* ================= CONTADOR ================= */
 .esperamos {
-padding: 40px 20px 60px;
+  padding: 30px 20px 60px;
 }
-
-.frase {
-font-family: 'Great Vibes', cursive;
-font-size: clamp(2.8rem, 9vw, 4.2rem);
-color: #d4af37;
-margin-bottom: 25px;
-}
-
-/* BLOQUES */
-.contador {
-display: flex;
-justify-content: center;
-gap: 12px;
-flex-wrap: wrap;
-}
-
-.contador .bloque {
-background: rgba(255, 255, 255, 0.92);
-border: 2px solid #b89b5e;
-border-radius: 16px;
-min-width: 82px;
-padding: 14px 10px;
-box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-}
-
-.contador .bloque span {
-display: block;
-font-size: 32px;
-font-weight: 600;
-color: #3a2f1d;
-}
-
-.contador .bloque small {
-font-size: 12px;
-color: #6b5a3a;
-letter-spacing: 1px;
-text-transform: uppercase;
-}
-
-/* MENSAJE */
-.mensaje-contador {
-margin-top: 14px;
-font-size: 18px;
-color: #d4af37;
-font-weight: 600;
-}
-
-/* ================= BOTÓN MAPS ================= */
-.btn-maps {
-display: inline-block;
-margin-top: 25px;
-padding: 14px 36px;
-background: linear-gradient(145deg, #d4af37, #b8962e);
-color: #000;
-font-weight: bold;
-border-radius: 40px;
-text-decoration: none;
-box-shadow: 0 0 22px rgba(212,175,55,0.45);
-transition: transform 0.3s ease;
-}
-
-.btn-maps:hover {
-transform: scale(1.05);
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 480px) {
-.contador {
-gap: 8px;
-}
-
-.contador .bloque {
-min-width: 70px;
-padding: 10px 8px;
-}
-
-.contador .bloque span {
-font-size: 26px;
-}
-
-.frase {
-font-size: 2.5rem;
-}
-}
-/* ================= DORADOS MÁS PROTAGONISTAS ================= */
-
-/* TITULOS */
-h3 {
-  color: #f2d98c; /* dorado más claro */
-  text-shadow:
-    0 0 6px rgba(242, 217, 140, 0.55),
-    0 0 14px rgba(212, 175, 55, 0.35);
-}
-
-/* FRASE "FALTAN..." */
-.frase {
-  color: #f6e3a1;
-  text-shadow:
-    0 0 10px rgba(246, 227, 161, 0.65),
-    0 0 22px rgba(212, 175, 55, 0.45);
-}
-
-/* MENSAJE DEL CONTADOR */
-.mensaje-contador {
-  color: #f4d77e;
-  text-shadow:
-    0 0 6px rgba(244, 215, 126, 0.6);
-}
-
-/* TEXTOS IMPORTANTES (ubicación, descripciones) */
-.contenido p {
-  color: #f7f0dc;
-}
-
-/* BOTÓN MAPS MÁS VIVO */
-.btn-maps {
-  background: linear-gradient(145deg, #f5dc8a, #cfa234);
-  box-shadow:
-    0 0 18px rgba(245, 220, 138, 0.6),
-    0 0 36px rgba(212, 175, 55, 0.35);
-}
-/* ================= CONTADOR RESPONSIVO REAL ================= */
 
 .contador {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* siempre 4 en línea */
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(6px, 2vw, 12px);
   max-width: 420px;
   margin: 0 auto;
 }
 
 .contador .bloque {
-  min-width: 0; /* CLAVE para que pueda achicarse */
-  padding: clamp(8px, 2vw, 14px);
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #b89b5e;
   border-radius: 14px;
+  padding: clamp(8px, 2vw, 14px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
-/* NÚMEROS */
 .contador .bloque span {
+  display: block;
   font-size: clamp(20px, 5vw, 32px);
+  font-weight: 600;
+  color: #3a2f1d;
 }
 
-/* TEXTO */
 .contador .bloque small {
   font-size: clamp(10px, 2.5vw, 12px);
+  color: #6b5a3a;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
+
+/* MENSAJE CONTADOR */
+.mensaje-contador {
+  margin-top: 16px;
+  font-size: 18px;
+  color: #f4d77e;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(244, 215, 126, 0.6);
+}
+
+/* ================= ICONOS DORADOS (UBICACIÓN + RELOJ) ================= */
+.icono-ubicacion,
+.icono-reloj {
+  display: block;
+  margin: 22px auto 8px;
+  width: 75px;
+
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg) brightness(95%) contrast(92%)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+
+  animation: flotar 2.8s ease-in-out infinite;
+}
+
+/* Animación elegante */
+@keyframes flotar {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* ================= BOTÓN MAPS ================= */
+.btn-maps {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 36px;
+  background: linear-gradient(145deg, #f5dc8a, #cfa234);
+  color: #000;
+  font-weight: bold;
+  border-radius: 40px;
+  text-decoration: none;
+  box-shadow:
+    0 0 18px rgba(245, 220, 138, 0.6),
+    0 0 36px rgba(212, 175, 55, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.btn-maps:hover {
+  transform: scale(1.05);
+}
+
+/* ================= MEDIA QUERIES ================= */
+@media (max-width: 480px) {
+  .separador-linea {
+    height: 18px;
+    margin: 14px 0;
+  }
+}
+
+
+
