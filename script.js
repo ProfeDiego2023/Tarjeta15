@@ -106,5 +106,27 @@ if (selectAsistencia && grupoInvitados) {
     }
   });
 }
+/* ================== GALERIA ================== */
+const galeriaItems = document.querySelectorAll('.galeria-item');
+galeriaItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const imagenSrc = item.getAttribute('data-imagen-grande');
+    if (imagenSrc) {
+      const overlay = document.createElement('div');
+      overlay.classList.add('galeria-overlay');
+
+      const imagen = document.createElement('img');
+      imagen.src = imagenSrc;
+      imagen.alt = "Imagen ampliada";
+      overlay.appendChild(imagen);
+
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener('click', () => {
+        document.body.removeChild(overlay);
+      });
+    }
+  });
+});
 
 });
