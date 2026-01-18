@@ -95,21 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
 const selectAsistencia = document.querySelector(
   '#form-confirmacion select[name="asistencia"]'
 );
-
 const grupoInvitados = document.querySelector('.grupo-importes');
-const menuOpciones = document.querySelector('.menu-opciones');
-
-if (grupoInvitados) grupoInvitados.classList.remove('activo');
-if (menuOpciones) menuOpciones.style.display = "none";
 
 if (selectAsistencia && grupoInvitados) {
   selectAsistencia.addEventListener('change', () => {
     if (selectAsistencia.value === 'SI') {
       grupoInvitados.classList.add('activo');
-      if (menuOpciones) menuOpciones.style.display = "grid";
     } else {
       grupoInvitados.classList.remove('activo');
-      if (menuOpciones) menuOpciones.style.display = "none";
     }
   });
 }
