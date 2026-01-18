@@ -33,6 +33,7 @@
 
     <h3 class="titulo-seccion">Te esperamos ✨</h3>
     <p>Una noche especial para compartir, celebrar y disfrutar juntos.</p>
+    <h4>No te olvides, Sábado 28 de febrero a las 21 horas</h4>
 
     <div class="separador-linea">
       <img src="img/lineafinal.png" class="linea-img" alt="">
@@ -88,7 +89,7 @@
 
     <img src="img/valortarjeta.png" class="icono-dorado" alt="Valor tarjeta">
 
-    <h3 class="titulo-seccion">Valor de la tarjeta</h3>
+    <h3 class="titulo-seccion">Valor tarjeta</h3>
 
     <ul class="lista-valores">
       <li><strong>Mayores:</strong> $69.000</li>
@@ -109,6 +110,7 @@
     <img src="img/asistencia.png" class="icono-dorado" alt="Confirmación">
 
     <h3 class="titulo-seccion">Confirmación de asistencia</h3>
+    <p>Por favor, confirmá tu asistencia hasta el 10/02/2026.</p>
 
     <form id="form-confirmacion">
 
@@ -120,37 +122,55 @@
         <option value="NO">No podré asistir</option>
       </select>
 
-      <fieldset class="grupo-importes">
-        <legend>Seleccioná los invitados</legend>
+      <!-- BLOQUE INVITADOS -->
+<fieldset class="grupo-importes">
+  <legend>Seleccioná los invitados</legend>
 
-        <label>
-          <span>Mayores</span>
-          <input type="number" name="mayores" min="0" max="99" value="0">
-        </label>
+  <label>
+    <span>Mayores</span>
+    <input type="number" name="mayores" min="0" max="99" value="0">
+  </label>
 
-        <label>
-          <span>Menores 2 a 5</span>
-          <input type="number" name="menores_2_5" min="0" max="99" value="0">
-        </label>
+  <label>
+    <span>Menores 2 a 5</span>
+    <input type="number" name="menores_2_5" min="0" max="99" value="0">
+  </label>
 
-        <label>
-          <span>Menores 6 a 12</span>
-          <input type="number" name="menores_6_12" min="0" max="99" value="0">
-        </label>
+  <label>
+    <span>Menores 6 a 12</span>
+    <input type="number" name="menores_6_12" min="0" max="99" value="0">
+  </label>
 
-        <label>
-          <span>Adolescentes</span>
-          <input type="number" name="adolescentes" min="0" max="99" value="0">
-        </label>
+  <label>
+    <span>Adolescentes</span>
+    <input type="number" name="adolescentes" min="0" max="99" value="0">
+  </label>
 
-        <label>
-          <span>Trasnoche</span>
-          <input type="number" name="trasnoche" min="0" max="99" value="0">
-        </label>
-      </fieldset>
+  <label>
+    <span>Trasnoche</span>
+    <input type="number" name="trasnoche" min="0" max="99" value="0">
+  </label>
+</fieldset>
+
+<!-- BLOQUE MENÚ -->
+<fieldset class="grupo-menu">
+  <legend>Preferencias de menú</legend>
+
+  <label><input type="checkbox" name="menu[]" value="Normal"> Normal</label>
+  <label><input type="checkbox" name="menu[]" value="Vegetariano"> Vegetariano</label>
+  <label><input type="checkbox" name="menu[]" value="Vegano"> Vegano</label>
+  <label><input type="checkbox" name="menu[]" value="Celíaco"> Celíaco (Sin TACC)</label>
+  <label><input type="checkbox" name="menu[]" value="Otro"> Otro</label>
+</fieldset>
+
+<!-- ALIAS DE PAGO -->
+<p class="alias-pago">
+  Realizá la transferencia al siguiente alias:<br>
+  <strong>melu.1985</strong>
+</p>
 
       <button type="submit" class="btn-confirmar">
-        Confirmar asistencia
+        Confirmar
       </button>
     </form>
 
@@ -161,6 +181,50 @@
     </div>
 
   </section>
+
+<!-- ================= REGALOS ================= -->
+<section class="contenido regalos">
+
+  <img src="img/regalo.png" class="icono-dorado" alt="Regalos">
+
+  <h3 class="titulo-seccion">Regalos</h3>
+
+  <p>
+    <strong>El mejor regalo es tu presencia</strong><br>
+    pero si deseás hacerme un obsequio, podés hacerlo mediante el alias:<br>
+    <br>
+    <strong>florii.gonzales</strong>
+  </p>
+
+  <div class="separador-linea">
+    <img src="img/lineafinal.png" class="linea-img" alt="">
+  </div>
+
+</section>
+
+
+
+
+<!-- ================= GALERÍA ================= -->
+<section class="contenido galeria">
+  <img src="img/camara.png" class="icono-dorado" alt="Camara">
+
+  <h3 class="titulo-seccion">Momentos ✨</h3>
+
+  <div class="carousel">
+    <div class="carousel-track">
+      <img src="img/foto1.jpeg">
+      <img src="img/foto2.jpeg">
+      <img src="img/foto3.jpeg">
+
+      <img src="img/foto1.jpeg">
+      <img src="img/foto2.jpeg">
+      <img src="img/foto3.jpeg">
+    </div>
+
+  </div>
+
+</section>
 
 </section>
 

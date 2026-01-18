@@ -40,41 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarContador();
   setInterval(actualizarContador, 1000);
 
-  /* ================== CARRUSEL ================== */
-  let index = 0;
-  const slides = document.querySelector(".slides");
-  const dots = document.querySelectorAll(".dot");
-
-  if (slides && dots.length > 0) {
-    function mostrarSlide(i) {
-      index = i;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach(dot => dot.classList.remove("active"));
-      dots[index].classList.add("active");
-    }
-
-    setInterval(() => {
-      index = (index + 1) % dots.length;
-      mostrarSlide(index);
-    }, 4000);
-
-    let startX = 0;
-
-    slides.addEventListener("touchstart", e => {
-      startX = e.touches[0].clientX;
-    });
-
-    slides.addEventListener("touchend", e => {
-      const endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50) index = (index + 1) % dots.length;
-      else if (endX - startX > 50) index = (index - 1 + dots.length) % dots.length;
-      mostrarSlide(index);
-    });
-  }
-
   /* ================== MÚSICA ================== */
   const audio = document.getElementById("musica");
-  const icon = document.getElementById("music-icon");
   const btn = document.querySelector(".music-player");
 
   let reproduciendo = false;
@@ -109,73 +76,42 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!reproduciendo) {
       audio.play().then(() => {
         fadeIn();
-        if (icon) icon.textContent = "❚❚";
-        if (btn) btn.classList.add("playing");
         reproduciendo = true;
       }).catch(() => {});
     } else {
       fadeOut();
-      if (icon) icon.textContent = "▶";
-      if (btn) btn.classList.remove("playing");
       reproduciendo = false;
     }
   };
 
-  /* ================== AUTOPLAY MOBILE ================== */
+  /* ================== ACTIVAR AUDIO EN MOBILE ================== */
   document.addEventListener("click", () => {
     if (audio && audio.paused) {
       audio.play().catch(() => {});
     }
   }, { once: true });
 
-  /* ================== REVEAL ================== */
-  const reveals = document.querySelectorAll(".reveal");
-
-  function revealOnScroll() {
-    const windowHeight = window.innerHeight;
-    reveals.forEach(el => {
-      if (el.getBoundingClientRect().top < windowHeight - 120) {
-        el.classList.add("visible");
-      }
-    });
-  }
-
-  window.addEventListener("scroll", revealOnScroll);
-  window.addEventListener("load", revealOnScroll);
-
-  /* ================== WHATSAPP CONFIRMACIÓN ================== */
-  const btnWhatsapp = document.getElementById("btnWhatsapp");
-  if (btnWhatsapp) {
-    const telefono = "5493496538566"; // 🔴 CAMBIAR
-    const mensaje = encodeURIComponent(
-      "Hola! Confirmo mi asistencia a los 15 🎉✨\n\nNombre:\nCantidad de personas:\nYa realicé el pago."
-    );
-    btnWhatsapp.href = `https://wa.me/${telefono}?text=${mensaje}`;
-  }
-
-  /* ================== CONFIRMADO VISUAL ================== */
-  const formBox = document.querySelector(".formulario-box");
-  const confirmado = document.getElementById("confirmado");
-
-  if (formBox && confirmado) {
-    formBox.addEventListener("click", () => {
-      confirmado.classList.remove("oculto");
-    });
-  }
-
-});
-// Mostrar / ocultar invitados según asistencia
+ /* ================== CONFIRMACIÓN DE ASISTENCIA ================== */
 const selectAsistencia = document.querySelector(
   '#form-confirmacion select[name="asistencia"]'
 );
+
 const grupoInvitados = document.querySelector('.grupo-importes');
+const menuOpciones = document.querySelector('.menu-opciones');
+
+if (grupoInvitados) grupoInvitados.classList.remove('activo');
+if (menuOpciones) menuOpciones.style.display = "none";
 
 if (selectAsistencia && grupoInvitados) {
   selectAsistencia.addEventListener('change', () => {
     if (selectAsistencia.value === 'SI') {
       grupoInvitados.classList.add('activo');
+      if (menuOpciones) menuOpciones.style.display = "grid";
     } else {
       grupoInvitados.classList.remove('activo');
+      if (menuOpciones) menuOpciones.style.display = "none";
     }
   });
 }
+
+});
