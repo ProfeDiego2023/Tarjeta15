@@ -6,139 +6,169 @@
   <title>Invitación</title>
 
   <!-- FUENTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Farsan&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-  <!-- CABECERA / FOTO PRINCIPAL -->
-  <section class="hero-fondo"></section>
+<!-- ================= CABECERA ================= -->
+<section class="hero-fondo"></section>
 
-  <!-- LÍNEA DORADA -->
-  <div class="linea-dorada"></div>
+<!-- ================= UNIÓN ================= -->
+<div class="linea-dorada"></div>
 
+<!-- ================= FONDO LISO ================= -->
+<section class="fondo-liso">
+  <div class="velo"></div>
+  <div class="estrellas"></div>
 
-  <!-- FONDO LISO CON TODO EL CONTENIDO -->
-  <section class="fondo-liso">
-    <div class="velo"></div>
-    <div class="estrellas"></div>
+  <!-- ================= TE ESPERAMOS ================= -->
+  <section class="contenido">
 
-    <!-- TEXTO -->
-   <section class="contenido">
-      <h3 class="titulo-seccion">Te esperamos ✨</h3>
-      <p>Una noche especial para compartir, celebrar y disfrutar juntos.</p>
+    <!-- icono fiesta -->
+    <img src="img/fiesta.png" class="icono-dorado" alt="Fiesta">
 
-      <div class="separador-linea"></div>
-    </section>
+    <h3 class="titulo-seccion">Te esperamos ✨</h3>
+    <p>Una noche especial para compartir, celebrar y disfrutar juntos.</p>
 
+    <div class="separador-linea">
+      <img src="img/lineafinal.png" class="linea-img" alt="">
+    </div>
+  </section>
 
-    <!-- CONTADOR -->
-    <section class="esperamos">
-      <div class="separador-linea">
-        <img src="img/lineafinal.png" alt="" class="linea-img">      </div>
+  <!-- ================= CONTADOR ================= -->
+  <section class="esperamos">
 
-      <p class="frase">Faltan...</p>
+    <img src="img/reloj.png" class="icono-dorado" alt="Reloj">
 
-      <div id="contador" class="contador">
-        <div class="bloque">
-          <span id="dias">0</span>
-          <small>Días</small>
-        </div>
-        <div class="bloque">
-          <span id="horas">0</span>
-          <small>Horas</small>
-        </div>
-        <div class="bloque">
-          <span id="minutos">0</span>
-          <small>Min</small>
-        </div>
-        <div class="bloque">
-          <span id="segundos">0</span>
-          <small>Seg</small>
-        </div>
-      </div>
+    <p class="frase">Faltan...</p>
 
-      <p id="mensaje-contador" class="mensaje-contador"></p>
-    </section>
+    <div id="contador" class="contador">
+      <div class="bloque"><span id="dias">0</span><small>Días</small></div>
+      <div class="bloque"><span id="horas">00</span><small>Horas</small></div>
+      <div class="bloque"><span id="minutos">00</span><small>Min</small></div>
+      <div class="bloque"><span id="segundos">00</span><small>Seg</small></div>
+    </div>
 
-    <!-- UBICACIÓN -->
-    <section class="contenido ubicacion">
+    <p id="mensaje-contador" class="mensaje-contador"></p>
+  </section>
 
-  <!-- separador arriba -->
-  <div class="separador-linea">
-    <img src="img/lineafinal.png" alt="" class="linea-img">
-  </div>
+  <!-- ================= UBICACIÓN ================= -->
+  <section class="contenido ubicacion">
 
-  <img src="img/ubicacion.png" alt="Icono de ubicación" class="icono-ubicacion">
+    <div class="separador-linea">
+      <img src="img/lineafinal.png" class="linea-img" alt="">
+    </div>
 
-  <h3 class="titulo-seccion">Ubicación</h3>
+    <img src="img/ubicacion.png" class="icono-dorado" alt="Ubicación">
 
-  <p>
-    Club Social Aarón Castellanos<br>
-    Rivadavia 2078, Esperanza, Santa Fe
-  </p>
+    <h3 class="titulo-seccion">Ubicación</h3>
 
-  <a
-    class="btn-maps"
-    href="https://www.google.com/maps/search/?api=1&query=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
-    target="_blank"
-    rel="noopener noreferrer">
-    Cómo llegar
-  </a>
+    <p>
+      Club Social Aarón Castellanos<br>
+      Rivadavia 2078, Esperanza, Santa Fe
+    </p>
 
-  <!-- separador abajo -->
-  <div class="separador-linea">
-    <img src="img/lineafinal.png" alt="" class="linea-img">
-  </div>
+    <a class="btn-maps"
+       href="https://www.google.com/maps/search/?api=1&query=Club+Social+Aaron+Castellanos+Esperanza+Santa+Fe"
+       target="_blank">
+       Cómo llegar
+    </a>
+
+    <div class="separador-linea">
+      <img src="img/lineafinal.png" class="linea-img" alt="">
+    </div>
+  </section>
+
+  <!-- ================= VALOR TARJETA ================= -->
+  <section class="contenido valor-tarjeta">
+
+    <img src="img/valortarjeta.png" class="icono-dorado" alt="Valor tarjeta">
+
+    <h3 class="titulo-seccion">Valor de la tarjeta</h3>
+
+    <ul class="lista-valores">
+      <li><strong>Mayores:</strong> $69.000</li>
+      <li><strong>Menores 2 a 5 años:</strong> $20.000</li>
+      <li><strong>Menores 6 a 12 años:</strong> $35.000</li>
+      <li><strong>Adolescentes:</strong> $50.000</li>
+      <li><strong>Trasnoche:</strong> $25.000</li>
+    </ul>
+
+    <div class="separador-linea">
+      <img src="img/lineafinal.png" class="linea-img" alt="">
+    </div>
+  </section>
+
+  <!-- ================= CONFIRMACIÓN ================= -->
+  <section class="contenido confirmacion">
+
+    <img src="img/asistencia.png" class="icono-dorado" alt="Confirmación">
+
+    <h3 class="titulo-seccion">Confirmación de asistencia</h3>
+
+    <form id="form-confirmacion">
+
+      <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+
+      <select name="asistencia" required>
+        <option value="">¿Vas a asistir?</option>
+        <option value="SI">Sí, asistiré</option>
+        <option value="NO">No podré asistir</option>
+      </select>
+
+      <fieldset class="grupo-importes">
+        <legend>Seleccioná los invitados</legend>
+
+        <label>
+          <span>Mayores</span>
+          <input type="number" name="mayores" min="0" max="99" value="0">
+        </label>
+
+        <label>
+          <span>Menores 2 a 5</span>
+          <input type="number" name="menores_2_5" min="0" max="99" value="0">
+        </label>
+
+        <label>
+          <span>Menores 6 a 12</span>
+          <input type="number" name="menores_6_12" min="0" max="99" value="0">
+        </label>
+
+        <label>
+          <span>Adolescentes</span>
+          <input type="number" name="adolescentes" min="0" max="99" value="0">
+        </label>
+
+        <label>
+          <span>Trasnoche</span>
+          <input type="number" name="trasnoche" min="0" max="99" value="0">
+        </label>
+      </fieldset>
+
+      <button type="submit" class="btn-confirmar">
+        Confirmar asistencia
+      </button>
+    </form>
+
+    <p id="estado-confirmado" class="confirmado"></p>
+
+    <div class="separador-linea">
+      <img src="img/lineafinal.png" class="linea-img" alt="">
+    </div>
 
   </section>
 
-  <!-- SCRIPT CONTADOR -->
-  <script>
-    (() => {
-      const fechaEvento = new Date("2026-02-28T21:00:00").getTime();
+</section>
 
-      const diasEl = document.getElementById("dias");
-      const horasEl = document.getElementById("horas");
-      const minutosEl = document.getElementById("minutos");
-      const segundosEl = document.getElementById("segundos");
-      const mensajeEl = document.getElementById("mensaje-contador");
-      const contadorEl = document.getElementById("contador");
+<!-- ================= MÚSICA ================= -->
+<audio id="musica" src="music/MusicaTarjeta.mpeg" loop></audio>
 
-      function actualizar() {
-        const ahora = Date.now();
-        const diff = fechaEvento - ahora;
+<div class="music-player" onclick="toggleMusic()">▶</div>
 
-        if (diff <= 0) {
-          contadorEl.style.display = "none";
-          mensajeEl.textContent = "🎉 ¡Ya estamos festejando! 🎉";
-          return;
-        }
-
-        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutos = Math.floor((diff / (1000 * 60)) % 60);
-        const segundos = Math.floor((diff / 1000) % 60);
-
-        diasEl.textContent = dias;
-        horasEl.textContent = horas.toString().padStart(2, '0');
-        minutosEl.textContent = minutos.toString().padStart(2, '0');
-        segundosEl.textContent = segundos.toString().padStart(2, '0');
-
-        if (dias === 1) {
-          mensajeEl.textContent = "✨ Falta solo 1 día ✨";
-        } else {
-          mensajeEl.textContent = "";
-        }
-      }
-
-      actualizar();
-      setInterval(actualizar, 1000);
-    })();
-  </script>
-
+<script src="script.js"></script>
 </body>
 </html>

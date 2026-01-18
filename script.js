@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const distancia = fechaEvento - ahora;
 
     if (distancia <= 0) {
-      contadorEl.style.display = "none";
-      mensajeEl.textContent = "🎉 ¡Ya estamos festejando! 🎉";
+      if (contadorEl) contadorEl.style.display = "none";
+      if (mensajeEl) mensajeEl.textContent = "🎉 ¡Ya estamos festejando! 🎉";
       return;
     }
 
@@ -28,12 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const segundos = Math.floor((distancia / 1000) % 60);
 
     diasEl.textContent = dias;
-    horasEl.textContent = horas;
-    minutosEl.textContent = minutos;
-    segundosEl.textContent = segundos;
+    horasEl.textContent = horas.toString().padStart(2, "0");
+    minutosEl.textContent = minutos.toString().padStart(2, "0");
+    segundosEl.textContent = segundos.toString().padStart(2, "0");
 
-    mensajeEl.textContent =
-      dias === 1 ? "✨ Falta solo 1 día ✨" : "";
+    if (mensajeEl) {
+      mensajeEl.textContent = dias === 1 ? "✨ Falta solo 1 día ✨" : "";
+    }
   }
 
   actualizarContador();
@@ -45,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const dots = document.querySelectorAll(".dot");
 
   if (slides && dots.length > 0) {
-
     function mostrarSlide(i) {
       index = i;
       slides.style.transform = `translateX(-${index * 100}%)`;
@@ -66,12 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     slides.addEventListener("touchend", e => {
       const endX = e.changedTouches[0].clientX;
-
-      if (startX - endX > 50) {
-        index = (index + 1) % dots.length;
-      } else if (endX - startX > 50) {
-        index = (index - 1 + dots.length) % dots.length;
-      }
+      if (startX - endX > 50) index = (index + 1) % dots.length;
+      else if (endX - startX > 50) index = (index - 1 + dots.length) % dots.length;
       mostrarSlide(index);
     });
   }
@@ -113,27 +109,32 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!reproduciendo) {
       audio.play().then(() => {
         fadeIn();
-        icon.textContent = "❚❚";
-        btn.classList.add("playing");
+        if (icon) icon.textContent = "❚❚";
+        if (btn) btn.classList.add("playing");
         reproduciendo = true;
-      });
+      }).catch(() => {});
     } else {
       fadeOut();
-      icon.textContent = "▶";
-      btn.classList.remove("playing");
+      if (icon) icon.textContent = "▶";
+      if (btn) btn.classList.remove("playing");
       reproduciendo = false;
     }
   };
+
+  /* ================== AUTOPLAY MOBILE ================== */
+  document.addEventListener("click", () => {
+    if (audio && audio.paused) {
+      audio.play().catch(() => {});
+    }
+  }, { once: true });
 
   /* ================== REVEAL ================== */
   const reveals = document.querySelectorAll(".reveal");
 
   function revealOnScroll() {
     const windowHeight = window.innerHeight;
-
     reveals.forEach(el => {
-      const elementTop = el.getBoundingClientRect().top;
-      if (elementTop < windowHeight - 120) {
+      if (el.getBoundingClientRect().top < windowHeight - 120) {
         el.classList.add("visible");
       }
     });
@@ -142,27 +143,39 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", revealOnScroll);
   window.addEventListener("load", revealOnScroll);
 
-  /* ================== RSVP ================== */
-  const form = document.getElementById("rsvp-form");
-  const respuesta = document.getElementById("respuesta");
+  /* ================== WHATSAPP CONFIRMACIÓN ================== */
+  const btnWhatsapp = document.getElementById("btnWhatsapp");
+  if (btnWhatsapp) {
+    const telefono = "5493496538566"; // 🔴 CAMBIAR
+    const mensaje = encodeURIComponent(
+      "Hola! Confirmo mi asistencia a los 15 🎉✨\n\nNombre:\nCantidad de personas:\nYa realicé el pago."
+    );
+    btnWhatsapp.href = `https://wa.me/${telefono}?text=${mensaje}`;
+  }
 
-  if (form) {
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const data = new FormData(form);
+  /* ================== CONFIRMADO VISUAL ================== */
+  const formBox = document.querySelector(".formulario-box");
+  const confirmado = document.getElementById("confirmado");
 
-      fetch("PEGAR_ACÁ_TU_URL_DE_GOOGLE_APPS_SCRIPT", {
-        method: "POST",
-        body: data
-      })
-      .then(() => {
-        respuesta.textContent = "✨ Gracias por confirmar ✨";
-        form.reset();
-      })
-      .catch(() => {
-        respuesta.textContent = "❌ Error al enviar. Intentá nuevamente.";
-      });
+  if (formBox && confirmado) {
+    formBox.addEventListener("click", () => {
+      confirmado.classList.remove("oculto");
     });
   }
 
 });
+// Mostrar / ocultar invitados según asistencia
+const selectAsistencia = document.querySelector(
+  '#form-confirmacion select[name="asistencia"]'
+);
+const grupoInvitados = document.querySelector('.grupo-importes');
+
+if (selectAsistencia && grupoInvitados) {
+  selectAsistencia.addEventListener('change', () => {
+    if (selectAsistencia.value === 'SI') {
+      grupoInvitados.classList.add('activo');
+    } else {
+      grupoInvitados.classList.remove('activo');
+    }
+  });
+}

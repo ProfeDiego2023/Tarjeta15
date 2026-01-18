@@ -219,13 +219,15 @@ body {
   text-shadow: 0 0 6px rgba(244, 215, 126, 0.6);
 }
 
-/* ================= ICONOS DORADOS (UBICACIÓN + RELOJ) ================= */
-.icono-ubicacion,
-.icono-reloj {
+/* ================= ICONOS DORADOS UNIFICADOS ================= */
+/* reloj + ubicación + asistencia */
+.icono-dorado {
   display: block;
   margin: 22px auto 8px;
-  width: 75px;
+  width: 74px;
+  height: auto;
 
+  /* conversión a dorado */
   filter:
     brightness(0) saturate(100%)
     invert(72%) sepia(38%) saturate(520%)
@@ -233,14 +235,24 @@ body {
     drop-shadow(0 2px 4px rgba(0,0,0,0.6));
 
   animation: flotar 2.8s ease-in-out infinite;
+  opacity: 0.95;
 }
 
-/* Animación elegante */
+/* animación elegante */
 @keyframes flotar {
   0%   { transform: translateY(0); }
   50%  { transform: translateY(-6px); }
   100% { transform: translateY(0); }
 }
+
+/* ajuste mobile */
+@media (max-width: 480px) {
+  .icono-dorado {
+    width: 56px;
+    margin-top: 18px;
+  }
+}
+
 
 /* ================= BOTÓN MAPS ================= */
 .btn-maps {
@@ -263,13 +275,375 @@ body {
 }
 
 /* ================= MEDIA QUERIES ================= */
-/* MOBILE */
+
 @media (max-width: 480px) {
-  .separador-linea .linea-img {
-    height: 20px;
+  .tarjeta-info {
+    padding: 22px 18px;
+  }
+
+  .precio span {
+    font-size: 1.7rem;
   }
 }
 
 
+/* ================= CONFIRMACIÓN ================= */
+.confirmacion {
+  padding: 60px 20px;
+}
 
+/* texto explicativo */
+.texto-confirmacion {
+  max-width: 620px;
+  margin: 0 auto 26px;
+  color: #f7f0dc;
+  font-size: 1.05rem;
+}
+
+/* bloque tarjeta */
+.tarjeta-info {
+  margin: 30px auto;
+  max-width: 420px;
+  padding: 28px 22px;
+
+  background: rgba(255,255,255,0.9);
+  border: 2px solid #b89b5e;
+  border-radius: 18px;
+
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+/* precio */
+.precio {
+  margin-bottom: 18px;
+  color: #3a2f1d;
+  font-size: 1.05rem;
+}
+
+.precio span {
+  display: block;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* alias */
+.alias {
+  color: #3a2f1d;
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+/* nota */
+.nota {
+  margin-top: 22px;
+  font-size: 0.95rem;
+  color: #f4d77e;
+}
+
+/* botón confirmar */
+.btn-confirmar {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 14px 38px;
+
+  background: linear-gradient(145deg, #f5dc8a, #cfa234);
+  color: #000;
+  font-weight: bold;
+  border-radius: 40px;
+  text-decoration: none;
+
+  box-shadow:
+    0 0 18px rgba(245, 220, 138, 0.6),
+    0 0 36px rgba(212, 175, 55, 0.35);
+
+  transition: transform 0.3s ease;
+}
+
+.btn-confirmar:hover {
+  transform: scale(1.05);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .tarjeta-info {
+    padding: 22px 18px;
+  }
+
+  .precio span {
+    font-size: 1.7rem;
+  }
+}
+
+/* ================= FORMULARIO ================= */
+.confirmacion form {
+  max-width: 420px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.confirmacion input,
+.confirmacion select {
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-confirmar {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(145deg, #f5dc8a, #cfa234);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ================= CONFIRMADO ================= */
+.confirmado {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #f6e3a1;
+  opacity: 0;
+  animation: none;
+}
+
+.confirmado.activo {
+  opacity: 1;
+  animation: brilloConfirmado 1.5s ease;
+}
+
+@keyframes brilloConfirmado {
+  0% { transform: scale(0.7); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* ================= MÚSICA ================= */
+.music-player {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(145deg, #f5dc8a, #cfa234);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(212,175,55,0.6);
+  z-index: 999;
+}
+
+/* ================= VALOR TARJETA ================= */
+.lista-valores {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 420px;
+}
+
+.lista-valores li {
+  padding: 6px 0;
+  font-size: 1.05rem;
+  color: #f7f0dc;
+}
+
+/* ================= CONFIRMACIÓN ================= */
+#form-confirmacion {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+#form-confirmacion input,
+#form-confirmacion select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+}
+
+.grupo-importes {
+  border: 1px solid rgba(212,175,55,0.4);
+  border-radius: 14px;
+  padding: 14px;
+  margin: 16px 0;
+}
+
+.grupo-importes legend {
+  color: #f6e3a1;
+  padding: 0 8px;
+  font-weight: 600;
+}
+
+.grupo-importes label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  color: #f7f0dc;
+}
+
+.grupo-importes input {
+  width: 70px;
+  text-align: center;
+}
+
+/* BOTÓN CONFIRMAR */
+.btn-confirmar {
+  margin-top: 18px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 40px;
+  border: none;
+  font-weight: bold;
+  background: linear-gradient(145deg, #f5dc8a, #cfa234);
+  color: #000;
+  cursor: pointer;
+}
+
+/* ================= VALOR TARJETA – ESTILO PREMIUM ================= */
+
+.lista-valores {
+  list-style: none;           /* sin puntos */
+  padding: 0;
+  margin: 24px auto;
+  max-width: 420px;
+}
+
+.lista-valores li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 14px;
+  margin: 6px 0;
+
+  font-size: 1.05rem;
+  line-height: 1.6;           /* interlineado suave */
+  color: #f7f0dc;
+
+  border-radius: 14px;
+  transition: 
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* efecto hover / focus táctil */
+.lista-valores li:hover {
+  transform: scale(1.035);
+  background: rgba(212, 175, 55, 0.12);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+/* etiqueta */
+.lista-valores strong {
+  font-weight: 600;
+  color: #f6e3a1;
+}
+
+/* precio */
+.lista-valores li span,
+.lista-valores li strong + text {
+  white-space: nowrap;
+}
+
+/* ================= TÍTULOS DE SECCIÓN – FORZADO ================= */
+.titulo-seccion,
+.frase {
+  font-family: 'Great Vibes', cursive !important;
+}
+
+/* ================= VALOR TARJETA – ZOOM REAL ================= */
+.lista-valores {
+  list-style: none;
+  padding: 0;
+  margin: 26px auto;
+  max-width: 420px;
+}
+
+.lista-valores li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 16px;
+  margin: 8px 0;
+
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #f7f0dc;
+
+  border-radius: 14px;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.lista-valores li:hover {
+  transform: scale(1.04);
+  background: rgba(212, 175, 55, 0.14);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.28);
+}
+
+.lista-valores strong {
+  color: #f6e3a1;
+  font-weight: 600;
+}
+
+/* ================= CONFIRMACIÓN – GRUPO INVITADOS ================= */
+.grupo-importes {
+  display: none; /* se abre solo si elige SI */
+  border: 1px solid rgba(212,175,55,0.4);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.grupo-importes label {
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  color: #f7f0dc;
+}
+
+/* inputs más chicos (2 dígitos visuales) */
+.grupo-importes input {
+  width: 52px;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ================= ANIMACIÓN APERTURA ================= */
+.grupo-importes.activo {
+  display: block;
+  animation: abrirGrupo 0.35s ease;
+}
+
+@keyframes abrirGrupo {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
