@@ -96,6 +96,7 @@ body {
     0 0 22px rgba(212,175,55,0.6);
 }
 
+
 /* ================= CONTENIDO ================= */
 .contenido {
   padding: 60px 20px 40px;
@@ -116,9 +117,8 @@ h4 {
 .icono-dorado {
   display: block;
   margin: 18px auto 8px;   /* un poco más compacto */
-  width: 60px;             /* 🔑 MÁS CHICO */
+  width: 70px;             /* 🔑 MÁS CHICO */
   height: auto;
-
   filter:
     brightness(0) saturate(100%)
     invert(72%) sepia(38%) saturate(520%)
@@ -213,6 +213,10 @@ h4 {
   max-width: 420px;
   margin: 24px auto;
   padding: 0;
+
+  border: 1px solid rgba(212,175,55,0.45);
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
 }
 
 .lista-valores li {
@@ -272,9 +276,11 @@ h4 {
 }
 
 .grupo-importes input {
+  display: block;
   width: 34px;
   text-align: center;
   font-size: 0.85rem;
+  
 }
 .grupo-importes legend {
   font-family: Great Vibes, cursive;
@@ -285,6 +291,7 @@ h4 {
 
 /* ===== MENÚ ===== */
 .grupo-menu {
+  
   margin-top: 18px;
   padding: 16px;
   border-radius: 16px;
@@ -311,65 +318,104 @@ h4 {
   cursor: pointer;
 }
 
+.music-player{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
 /* ================= REGALOS ================= */
 .icono-regalo {
   width: 92px;
   animation: flotar 3.2s ease-in-out infinite;
 }
+@media (max-width: 480px) {
+  .icono-regalo {
+    width: 80px;
+  }
+}
 
 /* ============================================== CARRUSEL FLOTANTE ============================================= */
-.carousel {
-  width: 100%;
-  overflow: hidden;
-  margin: 30px auto 10px;
-  pointer-events: none; /* no molesta al scroll */
-  
-  pointer-events: none;
+.linea-dorada2 {
+  bottom: 14px;
+  position: relative;
+  width: 100vw;
+  height: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: -21px 0;
+  z-index: 6;
 }
 
+.linea-dorada2::before {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 8px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to right,
+    transparent,
+    #f6e3a1,
+    #d4af37,
+    #f6e3a1,
+    transparent
+  );
+}
+.linea-dorada2::after {
+  content: "";
+  position: absolute;
+  inset: -11px 0 auto 0;
+  height: 100%;
+  background: url("img/lineafinal.png") center / 40% auto no-repeat;
+  filter:
+    brightness(0) saturate(100%)
+    invert(73%) sepia(42%) saturate(520%)
+    hue-rotate(7deg) brightness(96%) contrast(92%)
+    drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+}
+.galeria-fotos {
+  position: relative;
+  overflow: hidden;
+  padding: 30px 0;
+  background-image: url('img/fondoliso.jpeg'); 
+ top: -10px;
+}
+.velo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 1;
+} 
 .carousel-track {
   display: flex;
-  width: max-content;
-  animation: scrollCarrusel 30s linear infinite;
+  gap: 16px;
+  animation: scrollCarousel 10s linear infinite;
 }
-
-
-/* imágenes */
+@keyframes scrollCarousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 .carousel-track img {
-  width: 220px;
-  height: 300px;
+  width: 200px;
+  height: 280px;
   object-fit: cover;
-  border-radius: 18px;
-  
-  box-shadow:
-    0 8px 18px rgba(0,0,0,0.35),
-    0 0 14px rgba(212,175,55,0.25);
-
-  animation: flotarFoto 4s ease-in-out infinite;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* animación desplazamiento */
-@keyframes scrollCarrusel {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
 
-/* flotación individual */
-@keyframes flotarFoto {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-@keyframes scrollCarrusel {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* 📱 mobile */
+/* 📱 MOBILE */
 @media (max-width: 480px) {
   .carousel-track img {
     width: 160px;
@@ -378,25 +424,23 @@ h4 {
 }
 
 
+
 /* ================= MOBILE ================= */
 @media (max-width:480px){
   .grupo-menu { grid-template-columns: 1fr; }
   .icono-dorado { width: 56px; }
 }
-/* ================= FIX VELO SOBRE CARRUSEL ================= */
 
-/* el carrusel NO debe estar por encima del velo */
-.carousel,
-.carousel-track {
-  background: transparent !important;
+
+.mensajefinal {
+  padding: 60px 20px 80px;  
   position: relative;
-  z-index: 3;
-}   
-
-
-.mensajefinal p {
+  z-index: 1;
+}
+.mensajefinal p {  
   font-family: Great Vibes, cursive;
   color: #f5dc8a;
   font-size: 2rem;
   margin-top: 0;
+  z-index: 5;
 }
