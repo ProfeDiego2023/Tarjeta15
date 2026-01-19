@@ -1,4 +1,6 @@
 /* ================= BASE ================= */
+
+
 body {
   margin: 0;
   font-family: 'Playfair Display', serif;
@@ -15,28 +17,23 @@ body {
   z-index: 1;
 }
 
-/* ================= UNION ENTRE FONDOS (LÍNEA + IMAGEN) ================= */
+/* ================= LÍNEA DORADA ================= */
 .linea-dorada {
   position: relative;
   width: 100vw;
-  height: 42px; /* controla el área total */
+  height: 42px;
   left: 50%;
   transform: translateX(-50%);
+  margin: -21px 0;
   z-index: 6;
-  pointer-events: none;
-
-  /* superposición entre fondos */
-  margin-top: -21px;
-  margin-bottom: -21px;
 }
+
 .linea-dorada::before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 8px; /* delicada pero visible */
-
+  inset: 50% 0 auto 0;
+  height: 8px;
+  transform: translateY(-50%);
   background: linear-gradient(
     to right,
     transparent,
@@ -45,336 +42,193 @@ body {
     #f6e3a1,
     transparent
   );
-
-  transform: translateY(-50%);
-  opacity: 0.9;
 }
+
 .linea-dorada::after {
   content: "";
   position: absolute;
-
-  /* ⬆️ la subimos un poco */
-  top: -11px;       /* ajustá este valor si querés más/menos */
-  left: 0;
-  right: 0;
-  bottom: auto;
-
+  inset: -11px 0 auto 0;
   height: 100%;
-
-  background-image: url("img/lineafinal.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 40% auto;
-
+  background: url("img/lineafinal.png") center / 40% auto no-repeat;
   filter:
     brightness(0) saturate(100%)
     invert(73%) sepia(42%) saturate(520%)
     hue-rotate(7deg) brightness(96%) contrast(92%)
     drop-shadow(0 1px 2px rgba(0,0,0,0.35));
-
-  opacity: 0.95;
 }
-
-.separador-linea .linea-img {
-  display: inline-block;
-
-  height: 90px !important;   /* 🔑 CONTROLA TAMAÑO REAL */
-  width: auto !important;    /* proporción intacta */
-  max-width: none !important;
-
-  object-fit: contain;
-  object-position: center;
-
-  filter:
-    brightness(0) saturate(100%)
-    invert(73%) sepia(42%) saturate(520%)
-    hue-rotate(7deg) brightness(96%) contrast(92%)
-    drop-shadow(0 1px 2px rgba(0,0,0,0.35));
-
-  opacity: 0.95;
-}
-
 
 /* ================= FONDO LISO ================= */
 .fondo-liso {
   position: relative;
   background: url("img/fondoliso.jpeg") center / cover no-repeat;
-  min-height: 100vh;
-  overflow: hidden;
-  z-index: 2;
-}
-
-/* VELO OSCURO */
-.fondo-liso .velo {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
   z-index: 0;
 }
 
-/* ================= ESTRELLAS ANIMADAS ================= 
+.fondo-liso .velo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 1;
+}
+
 .fondo-liso .estrellas {
   position: absolute;
-  inset: -200% 0 0 0;
-  z-index: 1;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.55;
   pointer-events: none;
-
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.45) 1px, transparent 2px),
-    radial-gradient(circle, rgba(212,175,55,0.55) 1.5px, transparent 3px),
-    radial-gradient(circle, rgba(255,255,255,0.35) 2px, transparent 4px);
-
-  background-size:
-    90px 90px,
-    150px 150px,
-    260px 260px;
-
-  animation: estrellasFlotan 90s linear infinite;
-  opacity: 0.9;
 }
 
-@keyframes estrellasFlotan {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(50%);
-  }
-} */
+.fondo-liso > section {
+  position: relative;
+  z-index: 5;
+}
 
-
-/* ================= TITULOS UNIFICADOS ================= */
-/* Te esperamos / Faltan... / Ubicación */
+/* ================= TÍTULOS ================= */
 .titulo-seccion,
 .frase {
-  font-family: 'Great Vibes', serif;
+  font-family: 'Great Vibes', cursive;
   font-size: clamp(1.9rem, 5vw, 2.6rem);
-  font-weight: 600;
-  letter-spacing: 1px;
-  
-
   color: #f6e3a1;
   margin: 18px 0;
-  text-align: center;
-
   text-shadow:
-    0 0 10px rgba(246, 227, 161, 0.9),
-    0 0 22px rgba(212, 175, 55, 0.6);
+    0 0 10px rgba(246,227,161,0.9),
+    0 0 22px rgba(212,175,55,0.6);
 }
 
-/* ================= TEXTO ================= */
+/* ================= CONTENIDO ================= */
 .contenido {
   padding: 60px 20px 40px;
 }
 
 .contenido p {
-  color: #f7f0dc;
-  font-size: 1.05rem;
   max-width: 620px;
   margin: 0 auto;
+  color: #f7f0dc;
 }
 
-/* ================= CONTADOR ================= */
-.esperamos {
-  padding: 30px 20px 60px;
+h4 {
+  color: #f5dc8a;
+  font-size: 1.1rem;
 }
 
-.contador {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(6px, 2vw, 12px);
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-.contador .bloque {
-  background: rgba(255, 255, 255, 0.92);
-  border: 2px solid #b89b5e;
-  border-radius: 14px;
-  padding: clamp(8px, 2vw, 14px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-}
-
-.contador .bloque span {
-  display: block;
-  font-size: clamp(20px, 5vw, 32px);
-  font-weight: 600;
-  color: #3a2f1d;
-}
-
-.contador .bloque small {
-  font-size: clamp(10px, 2.5vw, 12px);
-  color: #6b5a3a;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-/* MENSAJE CONTADOR */
-.mensaje-contador {
-  margin-top: 16px;
-  font-size: 18px;
-  color: #f4d77e;
-  font-weight: 600;
-  text-shadow: 0 0 6px rgba(244, 215, 126, 0.6);
-}
-
-/* ================= ICONOS DORADOS UNIFICADOS ================= */
-/* reloj + ubicación + asistencia */
+/* ================= ICONOS ================= */
 .icono-dorado {
   display: block;
-  margin: 22px auto 8px;
-  width: 74px;
+  margin: 18px auto 8px;   /* un poco más compacto */
+  width: 60px;             /* 🔑 MÁS CHICO */
   height: auto;
 
-  /* conversión a dorado */
   filter:
     brightness(0) saturate(100%)
     invert(72%) sepia(38%) saturate(520%)
     hue-rotate(7deg) brightness(95%) contrast(92%)
     drop-shadow(0 2px 4px rgba(0,0,0,0.6));
-
-  animation: flotar 2.8s ease-in-out infinite;
-  opacity: 0.95;
+   animation: flotar 2.8s ease-in-out infinite;
 }
-
-/* animación elegante */
 @keyframes flotar {
   0%   { transform: translateY(0); }
-  50%  { transform: translateY(-6px); }
+  50%  { transform: translateY(-5px); }
   100% { transform: translateY(0); }
 }
 
-/* ajuste mobile */
 @media (max-width: 480px) {
   .icono-dorado {
-    width: 56px;
-    margin-top: 18px;
+    width: 46px;
+    margin: 16px auto 6px;
   }
 }
 
+/* ============================================== CONTENEDOR ======================================================== */
+.separador-linea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 16px auto;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* IMAGEN DEL SEPARADOR */
+.separador-linea .linea-img {
+  width: 180px;        /* 🔑 achicá acá (90px / 80px si querés más chico) */
+  max-width: 60%;
+  height: auto;
+
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg) brightness(95%) contrast(92%)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+
+  animation: flotarLinea 3s ease-in-out infinite;
+  opacity: 0.95;
+}
+
+
+/* ================= CONTADOR ================= */
+.esperamos { padding: 30px 20px 60px; }
+
+.contador {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.contador .bloque {
+  background: rgba(255,255,255,0.92);
+  border: 2px solid #b89b5e;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.contador span {
+  color: #3a2f1d;
+  font-size: 2rem;
+}
+
+.contador small {
+  color: #6b5a3a;
+  font-size: 0.7rem;
+}
 
 /* ================= BOTÓN MAPS ================= */
 .btn-maps {
   display: inline-block;
-  margin-top: 25px;
+  margin-top: 24px;
   padding: 14px 36px;
-  background: linear-gradient(145deg, #f5dc8a, #cfa234);
+  border-radius: 40px;
+  background: linear-gradient(145deg,#f5dc8a,#cfa234);
   color: #000;
   font-weight: bold;
-  border-radius: 40px;
   text-decoration: none;
-  box-shadow:
-    0 0 18px rgba(245, 220, 138, 0.6),
-    0 0 36px rgba(212, 175, 55, 0.35);
-  transition: transform 0.3s ease;
 }
 
-.btn-maps:hover {
-  transform: scale(1.05);
+/* ================= VALOR TARJETA ================= */
+.lista-valores {
+  list-style: none;
+  max-width: 420px;
+  margin: 24px auto;
+  padding: 0;
 }
 
-/* ================= MEDIA QUERIES ================= */
-
-@media (max-width: 480px) {
-  .tarjeta-info {
-    padding: 22px 18px;
-  }
-
-  .precio span {
-    font-size: 1.7rem;
-  }
+.lista-valores li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 14px;
+  transition: 0.25s;
 }
 
+.lista-valores li:hover {
+  transform: scale(1.04);
+  background: rgba(212,175,55,0.14);
+}
 
 /* ================= CONFIRMACIÓN ================= */
-.confirmacion {
-  padding: 60px 20px;
-}
-
-/* texto explicativo */
-.texto-confirmacion {
-  max-width: 620px;
-  margin: 0 auto 26px;
-  color: #f7f0dc;
-  font-size: 1.05rem;
-}
-
-/* bloque tarjeta */
-.tarjeta-info {
-  margin: 30px auto;
-  max-width: 420px;
-  padding: 28px 22px;
-
-  background: rgba(255,255,255,0.9);
-  border: 2px solid #b89b5e;
-  border-radius: 18px;
-
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
-}
-
-/* precio */
-.precio {
-  margin-bottom: 18px;
-  color: #3a2f1d;
-  font-size: 1.05rem;
-}
-
-.precio span {
-  display: block;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-top: 6px;
-}
-
-/* alias */
-.alias {
-  color: #3a2f1d;
-  font-size: 1rem;
-  word-break: break-word;
-}
-
-/* nota */
-.nota {
-  margin-top: 22px;
-  font-size: 0.95rem;
-  color: #f4d77e;
-}
-
-/* botón confirmar */
-.btn-confirmar {
-  display: inline-block;
-  margin-top: 28px;
-  padding: 14px 38px;
-
-  background: linear-gradient(145deg, #f5dc8a, #cfa234);
-  color: #000;
-  font-weight: bold;
-  border-radius: 40px;
-  text-decoration: none;
-
-  box-shadow:
-    0 0 18px rgba(245, 220, 138, 0.6),
-    0 0 36px rgba(212, 175, 55, 0.35);
-
-  transition: transform 0.3s ease;
-}
-
-.btn-confirmar:hover {
-  transform: scale(1.05);
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 480px) {
-  .tarjeta-info {
-    padding: 22px 18px;
-  }
-
-  .precio span {
-    font-size: 1.7rem;
-  }
-}
-
-/* ================= FORMULARIO ================= */
 .confirmacion form {
   max-width: 420px;
   margin: 30px auto;
@@ -388,314 +242,16 @@ body {
   padding: 14px;
   border-radius: 30px;
   border: none;
-  font-size: 1rem;
 }
 
-.btn-confirmar {
-  margin-top: 10px;
-  padding: 14px;
-  border-radius: 30px;
-  border: none;
-  background: linear-gradient(145deg, #f5dc8a, #cfa234);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* ================= CONFIRMADO ================= */
-.confirmado {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  color: #f6e3a1;
-  opacity: 0;
-  animation: none;
-}
-
-.confirmado.activo {
-  opacity: 1;
-  animation: brilloConfirmado 1.5s ease;
-}
-
-@keyframes brilloConfirmado {
-  0% { transform: scale(0.7); opacity: 0; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1); }
-}
-
-/* ================= MÚSICA ================= */
-.music-player {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  width: 54px;
-  height: 54px;
-  background: linear-gradient(145deg, #f5dc8a, #cfa234);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(212,175,55,0.6);
-  z-index: 999;
-}
-
-/* ================= VALOR TARJETA ================= */
-.lista-valores {
-  list-style: none;
-  padding: 0;
-  margin: 20px auto;
-  max-width: 420px;
-}
-
-.lista-valores li {
-  padding: 6px 0;
-  font-size: 1.05rem;
-  color: #f7f0dc;
-}
-
-/* ================= CONFIRMACIÓN ================= */
-#form-confirmacion {
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-#form-confirmacion input,
-#form-confirmacion select {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 12px;
-  border: none;
-  font-size: 1rem;
-}
-
-.grupo-importes {
-  border: 1px solid rgba(212,175,55,0.4);
-  border-radius: 14px;
-  padding: 14px;
-  margin: 16px 0;
-}
-
-.grupo-importes legend {
-  color: #f6e3a1;
-  padding: 0 8px;
-  font-weight: 600;
-}
-
-.grupo-importes label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 8px 0;
-  color: #f7f0dc;
-}
-
-.grupo-importes input {
-  width: 70px;
-  text-align: center;
-}
-
-/* BOTÓN CONFIRMAR */
-.btn-confirmar {
-  margin-top: 18px;
-  width: 100%;
-  padding: 14px;
-  border-radius: 40px;
-  border: none;
-  font-weight: bold;
-  background: linear-gradient(145deg, #f5dc8a, #cfa234);
-  color: #000;
-  cursor: pointer;
-}
-
-/* ================= VALOR TARJETA – ESTILO PREMIUM ================= */
-
-.lista-valores {
-  list-style: none;           /* sin puntos */
-  padding: 0;
-  margin: 24px auto;
-  max-width: 420px;
-}
-
-.lista-valores li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 10px 14px;
-  margin: 6px 0;
-
-  font-size: 1.05rem;
-  line-height: 1.6;           /* interlineado suave */
-  color: #f7f0dc;
-
-  border-radius: 14px;
-  transition: 
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-/* efecto hover / focus táctil */
-.lista-valores li:hover {
-  transform: scale(1.035);
-  background: rgba(212, 175, 55, 0.12);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-}
-
-/* etiqueta */
-.lista-valores strong {
-  font-weight: 600;
-  color: #f6e3a1;
-}
-
-/* precio */
-.lista-valores li span,
-.lista-valores li strong + text {
-  white-space: nowrap;
-}
-
-/* ================= TÍTULOS DE SECCIÓN – FORZADO ================= */
-.titulo-seccion,
-.frase {
-  font-family: 'Great Vibes', cursive !important;
-}
-
-/* ================= VALOR TARJETA – ZOOM REAL ================= */
-.lista-valores {
-  list-style: none;
-  padding: 0;
-  margin: 26px auto;
-  max-width: 420px;
-}
-
-.lista-valores li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 12px 16px;
-  margin: 8px 0;
-
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #f7f0dc;
-
-  border-radius: 14px;
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.lista-valores li:hover {
-  transform: scale(1.04);
-  background: rgba(212, 175, 55, 0.14);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.28);
-}
-
-.lista-valores strong {
-  color: #f6e3a1;
-  font-weight: 600;
-}
-
-/* ================= CONFIRMACIÓN – GRUPO INVITADOS ================= */
-.grupo-importes {
-  display: none; /* se abre solo si elige SI */
-  border: 1px solid rgba(212,175,55,0.4);
-  border-radius: 16px;
-  padding: 16px;
-  margin: 16px 0;
-}
-
-.grupo-importes label {
-  display: grid;
-  grid-template-columns: 1fr 52px;
-  align-items: center;
-  gap: 10px;
-  margin: 8px 0;
-  color: #f7f0dc;
-}
-
-/* inputs más chicos (2 dígitos visuales) */
-.grupo-importes input {
-  width: 52px;
-  padding: 8px;
-  border-radius: 10px;
-  border: none;
-  text-align: center;
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-/* ================= ANIMACIÓN APERTURA ================= */
-.grupo-importes.activo {
-  display: block;
-  animation: abrirGrupo 0.35s ease;
-}
-
-@keyframes abrirGrupo {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-h4 {
-  color: #f5dc8a;
-  font-size: 1.1rem;
-  margin-top: 12px;
-}
-
-/* ================= CARRUSEL RUEDA ================= */
-.carousel {
-  overflow: hidden;
-  width: 100%;
-  padding: 30px 0;
-}
-
-.carousel-track {
-  display: flex;
-  gap: 18px;
-  animation: scrollFotos 18s linear infinite;
-}
-
-.carousel-track img {
-  width: 240px;
-  height: auto;
-  border-radius: 18px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
-}
-
-@keyframes scrollFotos {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* ================= MENÚ CONFIRMACIÓN ================= */
-.menu-opciones {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-
-.menu-opciones label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.95rem;
-  color: #f7f0dc;
-}
-
-
+/* ===== GRUPO INVITADOS (OCULTO) ===== */
 .grupo-importes {
   display: none;
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid rgba(212,175,55,0.45);
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
 }
 
 .grupo-importes.activo {
@@ -704,238 +260,143 @@ h4 {
 }
 
 @keyframes abrirGrupo {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ================= FIX CAPAS DEFINITIVO ================= */
-.fondo-liso {
-  position: relative;
-  z-index: 0;
-}
-
-/* velo SIEMPRE abajo */
-.fondo-liso .velo {
-  z-index: 1;
-}
-
-/* estrellas arriba del velo pero abajo del texto */
-.fondo-liso .estrellas {
-  z-index: 2;
-  opacity: 0.55; /* 🔑 baja real */
-}
-
-/* TODO el contenido arriba de TODO */
-.fondo-liso > section {
-  position: relative;
-  z-index: 5;
-}
-/* ================= GRUPO INVITADOS (SI ASISTE) ================= */
-
-legend {
-  font-family: Great Vibes, cursive;
-  font-size: 1.5rem;
-  color: #f6e3a1;
-  padding: 0 8px;
-  font-weight: 600;
-}
-/* labels: más aire respecto al borde */
 .grupo-importes label {
   display: grid;
-  grid-template-columns: auto 1fr; /* texto | espacio flexible */
-  align-items: center;
+  grid-template-columns: 1fr 34px;
+  gap: 10px;
   margin: 10px 0;
 }
 
-
-/* inputs más chicos y corridos a la izquierda */
 .grupo-importes input {
-  width: 32px;            /* ⬅️ más angosto */
-  max-width: 32px;
-
-  padding: 4px 2px;
-  border-radius: 8px;
-  border: none;
-
+  width: 34px;
   text-align: center;
   font-size: 0.85rem;
-  font-weight: 600;
-
-  background: rgba(255, 255, 255, 0.95);
-  color: #3a2f1d;
-
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.25);
 }
+.grupo-importes legend {
+  font-family: Great Vibes, cursive;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #f6e3a1;
+} 
 
-
-
-/* mobile aún más compacto */
-@media (max-width: 480px) {
-  .grupo-importes label {
-    grid-template-columns: minmax(0, 1fr) 30px;
-  }
-
-  .grupo-importes input {
-    width: 26px;
-    max-width: 26px;
-    font-size: 0.8rem;
-  }
-}
-
-
-.grupo-importes {
-  padding-right: 22px; /* ⬅️ espacio interno contra el borde */
-  margin-top: 18px;
-  padding: 16px 14px;
-
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  border-radius: 16px;
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-
-  box-shadow:
-    inset 0 0 10px rgba(212,175,55,0.08),
-    0 6px 14px rgba(0,0,0,0.25);
-}
-
-
-/* ================= FIX DEFINITIVO GRUPO INVITADOS ================= */
-
-.grupo-importes {
-  padding-right: 24px; /* aire contra el borde dorado */
-}
-
-.grupo-importes label {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 36px; /* ⬅️ CLAVE */
-  align-items: center;
-  column-gap: 12px;
-  margin: 10px 0;
-}
-
-/* ================= MENÚ (DENTRO DE SI ASISTE) ================= */
-
+/* ===== MENÚ ===== */
 .grupo-menu {
   margin-top: 18px;
-  padding: 16px 14px;
-
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(212, 175, 55, 0.45);
+  padding: 16px;
   border-radius: 16px;
-
+  border: 1px solid rgba(212,175,55,0.45);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2,1fr);
   gap: 10px;
-
-  box-shadow:
-    inset 0 0 10px rgba(212,175,55,0.08),
-    0 6px 14px rgba(0,0,0,0.25);
 }
 
-/* cada opción */
 .grupo-menu label {
   display: flex;
   align-items: center;
   gap: 8px;
-
-  padding: 8px 10px;
-  border-radius: 12px;
-
-  font-size: 0.95rem;
-  color: #f7f0dc;
-
-  cursor: pointer;
-  transition: background 0.25s ease, transform 0.2s ease;
 }
 
-/* hover elegante */
-.grupo-menu label:hover {
-  background: rgba(212,175,55,0.14);
-  transform: scale(1.02);
-}
-
-/* checkbox estilizado (sin perder compatibilidad) */
-.grupo-menu input[type="checkbox"] {
-  accent-color: #d4af37;
-  transform: scale(1.05);
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 480px) {
-  .grupo-menu {
-    grid-template-columns: 1fr;
-    padding: 14px 12px;
-  }
-
-  .grupo-menu label {
-    font-size: 0.9rem;
-  }
-}
-
+/* ================= BOTÓN ================= */
 .btn-enviar {
   margin-top: 18px;
-  width: 100%;
   padding: 14px;
   border-radius: 40px;
   border: none;
   font-weight: bold;
-  background: linear-gradient(145deg, #f5dc8a, #cfa234);
-  color: #000;
+  background: linear-gradient(145deg,#f5dc8a,#cfa234);
   cursor: pointer;
 }
-/* ================= ALIAS PAGO ================= */
-.alias-pago {
-  margin-top: 18px;
-  font-size: 1.05rem;
-  color: #f7f0dc;
-  text-shadow: 0 0 6px rgba(212,175,55,0.5);
-}
 
-.alias-pago strong {
-  display: block;
-  margin-top: 6px;
-  font-size: 1.2rem;
-  color: #f6e3a1;
-}
-
-/* ================= ICONO REGALO – DESTACADO ================= */
+/* ================= REGALOS ================= */
 .icono-regalo {
-  display: block;
-  margin: 26px auto 12px;
-
-  width: 92px;        /* 🔼 más grande */
-  height: auto;
-
-  filter:
-    brightness(0) saturate(100%)
-    invert(74%) sepia(48%) saturate(640%)
-    hue-rotate(6deg) brightness(102%) contrast(98%)
-    drop-shadow(0 3px 6px rgba(0,0,0,0.6))
-    drop-shadow(0 0 10px rgba(212,175,55,0.45)); /* ✨ halo dorado */
-
-  animation: flotarRegalo 3.2s ease-in-out infinite;
-  opacity: 1;
+  width: 92px;
+  animation: flotar 3.2s ease-in-out infinite;
 }
 
-/* animación un poco más elegante */
-@keyframes flotarRegalo {
-  0%   { transform: translateY(0) scale(1); }
-  50%  { transform: translateY(-7px) scale(1.04); }
-  100% { transform: translateY(0) scale(1); }
+/* ============================================== CARRUSEL FLOTANTE ============================================= */
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  margin: 30px auto 10px;
+  pointer-events: none; /* no molesta al scroll */
+  
+  pointer-events: none;
 }
 
-/* mobile */
-@media (max-width: 480px) {
-  .icono-regalo {
-    width: 72px;
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scrollCarrusel 30s linear infinite;
+}
+
+
+/* imágenes */
+.carousel-track img {
+  width: 220px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 18px;
+  
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.35),
+    0 0 14px rgba(212,175,55,0.25);
+
+  animation: flotarFoto 4s ease-in-out infinite;
+}
+
+/* animación desplazamiento */
+@keyframes scrollCarrusel {
+  from {
+    transform: translateX(0);
   }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* flotación individual */
+@keyframes flotarFoto {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+@keyframes scrollCarrusel {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* 📱 mobile */
+@media (max-width: 480px) {
+  .carousel-track img {
+    width: 160px;
+    height: 220px;
+  }
+}
+
+
+/* ================= MOBILE ================= */
+@media (max-width:480px){
+  .grupo-menu { grid-template-columns: 1fr; }
+  .icono-dorado { width: 56px; }
+}
+/* ================= FIX VELO SOBRE CARRUSEL ================= */
+
+/* el carrusel NO debe estar por encima del velo */
+.carousel,
+.carousel-track {
+  background: transparent !important;
+  position: relative;
+  z-index: 3;
+}   
+
+
+.mensajefinal p {
+  font-family: Great Vibes, cursive;
+  color: #f5dc8a;
+  font-size: 2rem;
+  margin-top: 0;
 }

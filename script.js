@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ================== CONTADOR ================== */
+  /* =====================================================
+     CONTADOR REGRESIVO
+  ===================================================== */
   const fechaEvento = new Date("2026-02-28T21:00:00").getTime();
 
   const diasEl = document.getElementById("dias");
@@ -18,7 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (distancia <= 0) {
       if (contadorEl) contadorEl.style.display = "none";
-      if (mensajeEl) mensajeEl.textContent = "🎉 ¡Ya estamos festejando! 🎉";
+      if (mensajeEl) {
+        mensajeEl.textContent = "🎉 ¡Ya estamos festejando! 🎉";
+      }
       return;
     }
 
@@ -40,11 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarContador();
   setInterval(actualizarContador, 1000);
 
-  /* ================== MÚSICA ================== */
+  /* =====================================================
+     MÚSICA DE FONDO (fade in / fade out)
+  ===================================================== */
   const audio = document.getElementById("musica");
-  const btn = document.querySelector(".music-player");
-
+  const btnMusic = document.querySelector(".music-player");
   let reproduciendo = false;
+
   if (audio) audio.volume = 0;
 
   function fadeIn() {
@@ -53,7 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (v < 1) {
         v += 0.05;
         audio.volume = v;
-      } else clearInterval(fade);
+      } else {
+        clearInterval(fade);
+      }
     }, 80);
   }
 
@@ -74,59 +82,46 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!audio) return;
 
     if (!reproduciendo) {
-      audio.play().then(() => {
-        fadeIn();
-        reproduciendo = true;
-      }).catch(() => {});
+      audio.play()
+        .then(() => {
+          fadeIn();
+          reproduciendo = true;
+        })
+        .catch(() => {});
     } else {
       fadeOut();
       reproduciendo = false;
     }
   };
 
-  /* ================== ACTIVAR AUDIO EN MOBILE ================== */
+  /* Permitir audio en mobile (1er toque) */
   document.addEventListener("click", () => {
-    if (audio && audio.paused) {
+    if (audio && audio.paused && !reproduciendo) {
       audio.play().catch(() => {});
     }
   }, { once: true });
 
- /* ================== CONFIRMACIÓN DE ASISTENCIA ================== */
-const selectAsistencia = document.querySelector(
-  '#form-confirmacion select[name="asistencia"]'
-);
-const grupoInvitados = document.querySelector('.grupo-importes');
+  /* =====================================================
+     CONFIRMACIÓN DE ASISTENCIA
+     - Solo muestra invitados + menú si elige "SI"
+  ===================================================== */
+  const selectAsistencia = document.querySelector(
+    '#form-confirmacion select[name="asistencia"]'
+  );
+  const grupoInvitados = document.querySelector('.grupo-importes');
 
-if (selectAsistencia && grupoInvitados) {
-  selectAsistencia.addEventListener('change', () => {
-    if (selectAsistencia.value === 'SI') {
-      grupoInvitados.classList.add('activo');
-    } else {
-      grupoInvitados.classList.remove('activo');
-    }
-  });
-}
-/* ================== GALERIA ================== */
-const galeriaItems = document.querySelectorAll('.galeria-item');
-galeriaItems.forEach(item => {
-  item.addEventListener('click', () => {
-    const imagenSrc = item.getAttribute('data-imagen-grande');
-    if (imagenSrc) {
-      const overlay = document.createElement('div');
-      overlay.classList.add('galeria-overlay');
+  if (selectAsistencia && grupoInvitados) {
 
-      const imagen = document.createElement('img');
-      imagen.src = imagenSrc;
-      imagen.alt = "Imagen ampliada";
-      overlay.appendChild(imagen);
+    // 🔒 Estado inicial SIEMPRE oculto
+    grupoInvitados.classList.remove("activo");
 
-      document.body.appendChild(overlay);
-
-      overlay.addEventListener('click', () => {
-        document.body.removeChild(overlay);
-      });
-    }
-  });
-});
+    selectAsistencia.addEventListener("change", () => {
+      if (selectAsistencia.value === "SI") {
+        grupoInvitados.classList.add("activo");
+      } else {
+        grupoInvitados.classList.remove("activo");
+      }
+    });
+  }
 
 });
