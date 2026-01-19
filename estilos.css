@@ -598,6 +598,21 @@ h4 {
   position: relative;
   z-index: 5;
 }
+.mensajefinal h3 {
+  font-family: 'Great Vibes', cursive;
+  color: #f5dc8a;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  margin: 16px auto 0;
+  max-width: 720px;
+
+  text-shadow:
+    0 0 10px rgba(245,220,138,0.8),
+    0 0 22px rgba(212,175,55,0.5);
+
+  animation: flotarTexto 5s ease-in-out infinite;
+  position: relative;
+  z-index: 5;
+} 
 
 /* MOVIMIENTO SUAVE DEL TEXTO */
 @keyframes flotarTexto {
