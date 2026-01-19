@@ -128,51 +128,97 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 🔒 Enviar por celular
 
-  document.addEventListener("DOMContentLoaded", () => {
+ 
+document.addEventListener("DOMContentLoaded", () => {
 
   const form = document.getElementById("form-confirmacion");
+  const mensajeUI = document.getElementById("mensaje-confirmado");
+
+  if (!form) return;
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault(); // ⛔ no envía formulario clásico
+    e.preventDefault();
 
-    const nombre = form.querySelector('input[name="nombre"]')?.value || "";
+    // ===== OBTENER CAMPOS =====
+    const nombre = form.querySelector('input[name="nombre"]')?.value.trim();
     const asistencia = form.querySelector('select[name="asistencia"]')?.value;
 
-    let mensaje = `✨ *Confirmación de asistencia* ✨%0A%0A`;
-    mensaje += `👤 *Nombre:* ${nombre}%0A`;
-    mensaje += `📩 *Asistencia:* ${asistencia}%0A%0A`;
+    // ===== VALIDACIONES =====
+    if (!nombre) {
+      mostrarMensaje("⚠️ Ingresá tu nombre", false);
+      return;
+    }
+
+    if (!asistencia) {
+      mostrarMensaje("⚠️ Seleccioná si vas a asistir", false);
+      return;
+    }
+
+    // ===== ARMAR MENSAJE =====
+    let mensaje = `✨ *Confirmación de asistencia* ✨\n\n`;
+    mensaje += `👤 *Nombre:* ${nombre}\n`;
+    mensaje += `📩 *Asistencia:* ${asistencia}\n\n`;
 
     if (asistencia === "SI") {
-      const mayores = form.querySelector('input[name="mayores"]').value;
-      const m25 = form.querySelector('input[name="menores_2_5"]').value;
-      const m612 = form.querySelector('input[name="menores_6_12"]').value;
-      const adolescentes = form.querySelector('input[name="adolescentes"]').value;
-      const trasnoche = form.querySelector('input[name="trasnoche"]').value;
+      const mayores = valorNumero('mayores');
+      const m25 = valorNumero('menores_2_5');
+      const m612 = valorNumero('menores_6_12');
+      const adolescentes = valorNumero('adolescentes');
+      const trasnoche = valorNumero('trasnoche');
 
-      mensaje += `👥 *Invitados*%0A`;
-      mensaje += `- Mayores: ${mayores}%0A`;
-      mensaje += `- Menores 2 a 5: ${m25}%0A`;
-      mensaje += `- Menores 6 a 12: ${m612}%0A`;
-      mensaje += `- Adolescentes: ${adolescentes}%0A`;
-      mensaje += `- Trasnoche: ${trasnoche}%0A%0A`;
+      mensaje += `👥 *Invitados*\n`;
+      mensaje += `- Mayores: ${mayores}\n`;
+      mensaje += `- Menores 2 a 5: ${m25}\n`;
+      mensaje += `- Menores 6 a 12: ${m612}\n`;
+      mensaje += `- Adolescentes: ${adolescentes}\n`;
+      mensaje += `- Trasnoche: ${trasnoche}\n\n`;
 
       const menus = [...form.querySelectorAll('input[name="menu[]"]:checked')]
         .map(el => el.value);
 
       if (menus.length > 0) {
-        mensaje += `🍽️ *Menú:* ${menus.join(", ")}%0A%0A`;
+        mensaje += `🍽️ *Menú:* ${menus.join(", ")}\n\n`;
       }
+
+      // 💳 ALIAS AUTOMÁTICO
+      mensaje += `💳 *Alias para transferencia:*\n`;
+      mensaje += `melu.1985\n\n`;
     }
 
-    mensaje += `💛 Gracias por avisar`;
+    mensaje += `💛 Gracias por confirmar`;
 
-    // 📱 NÚMERO DE WHATSAPP (cambiá este)
-    const telefono = "5493496538566"; // ej: 5493496123456
+    // ===== ENVIAR A WHATSAPP =====
+    const telefono = "5493496538566"; // ⬅️ CAMBIAR
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
-    const url = `https://wa.me/${telefono}?text=${mensaje}`;
     window.open(url, "_blank");
+
+    // ===== FEEDBACK VISUAL =====
+    mostrarMensaje("✨ Confirmación enviada ✨", true);
+
+    // OPCIONAL: limpiar formulario
+    // form.reset();
   });
 
+  // ===== FUNCIONES =====
+  function valorNumero(name) {
+    const el = form.querySelector(`input[name="${name}"]`);
+    return el ? el.value : "0";
+  }
+
+  function mostrarMensaje(texto, ok) {
+    if (!mensajeUI) return;
+
+    mensajeUI.textContent = texto;
+    mensajeUI.classList.remove("activo");
+
+    if (ok) {
+      mensajeUI.classList.add("activo");
+    }
+  }
+
 });
+
+
 
 });
