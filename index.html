@@ -13,6 +13,7 @@
 </head>
 <body>
 
+
 <!-- ================= CABECERA ================= -->
 <section class="hero-fondo"></section>
 
@@ -119,6 +120,7 @@
         <label><span>Trasnoche</span><input type="number" name="trasnoche" min="0" max="99" value="0"></label>
 
         <div class="grupo-menu">
+          <legend>Características del Menú</legend>
           <label><input type="checkbox" name="menu[]" value="Normal"> Normal</label>
           <label><input type="checkbox" name="menu[]" value="Vegetariano"> Vegetariano</label>
           <label><input type="checkbox" name="menu[]" value="Vegano"> Vegano</label>
@@ -144,27 +146,39 @@
       pero si deseás hacerme un obsequio, podés hacerlo mediante el alias:
       <h4>florii.gonzalez</h4><br>
     </p>
+    <div class="separador-linea">
+      <img src="img/lineafinal.png" class="linea-img" alt="">
   </section>
 
-</section>
+
+  
 <!-- ================= GALERÍA DE FOTOS ================= -->
- <div class="linea-dorada2"></div> 
-<section class="galeria-fotos">  
+<section class="galeria-fotos">
+  <img src="img/camara.png" class="icono-camara" alt="Cámara">
+  <h3 class="titulo-seccion">Galería de fotos</h3>  
   <div class="carousel">
-    <div class="velo"></div>
-    <div class="carousel-viewport">
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="img/Foto1.jpeg" alt="Foto 1"></div>
-        <div class="carousel-slide"><img src="img/Foto2.jpeg" alt="Foto 2"></div>
-        <div class="carousel-slide"><img src="img/Foto3.jpeg" alt="Foto 3"></div>       
-      </div>
+    <div class="carousel-track">
+      <img src="img/Foto1.jpeg" alt="Foto 1">
+      <img src="img/Foto2.jpeg" alt="Foto 2">
+      <img src="img/Foto3.jpeg" alt="Foto 3">
+      <!-- duplicadas para loop infinito -->
+      <img src="img/Foto1.jpeg" alt="">
+      <img src="img/Foto2.jpeg" alt="">
+      <img src="img/Foto3.jpeg" alt="">
     </div>
-   
+  </div>
+</section>
+
+<!-- ================= MENSAJE FINAL ================= -->
+<div class="mensajefinal">
+  <div class="estrellas-mensaje">
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
 
-<div class="mensajefinal">
   <p>Hagamos juntos una noche inolvidable</p>
-</div>  
+</div>
+</section> <!-- cierre fondo liso (VELO) -->
+
 <!-- ================= MÚSICA ================= -->
 <audio id="musica" src="music/MusicaTarjeta.mpeg" loop></audio>
 <div class="music-player" onclick="toggleMusic()">▶</div>
