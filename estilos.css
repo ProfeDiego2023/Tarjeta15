@@ -111,27 +111,11 @@ h4 {
 }
 
 
-/* =================        CONTENIDO ================= */
-.contenido {
-  padding: 60px 20px 40px;
-}
-
-.contenido p {
-  max-width: 620px;
-  margin: 0 auto;
-  color: #f7f0dc;
-}
-
-h4 {
-  color: #f5dc8a;
-  font-size: 1.1rem;
-}
-
 /* ================= ICONOS ================= */
 .icono-dorado {
   display: block;
   margin: 16px auto 8px;
-  width: 58px;
+  width: 80px;
   filter:
     brightness(0) saturate(100%)
     invert(72%) sepia(38%) saturate(520%)
@@ -139,7 +123,73 @@ h4 {
     drop-shadow(0 2px 4px rgba(0,0,0,0.6));
   animation: flotar 3s ease-in-out infinite;
 }
+.icono-regalo {
+  display: flex;
+  margin: 16px auto 8px;
+  width: 85px;
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  animation: flotar 3.2s ease-in-out infinite;
+}
 
+.icono-fiesta {
+  display: flex;
+  margin: 16px auto 8px;
+  width: 60px;
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  animation: flotar 3.2s ease-in-out infinite;
+}
+.icono-reloj {
+  display: flex;
+  margin: 16px auto 8px;
+  width: 65px;
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  animation: flotar 3.2s ease-in-out infinite;
+}
+.icono-ubicacion {
+  display: flex;
+  margin: 16px auto 8px;
+  width: 75px;  
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  animation: flotar 3.2s ease-in-out infinite;
+}
+.icono-valortarjeta {
+  display: flex;
+  margin: 16px auto 8px;
+  width: 60px;
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  animation: flotar 3.2s ease-in-out infinite;
+}
+.icono-confirmacion {
+  display: flex;
+  margin: 16px auto 8px;
+  width: 65px;
+  filter:
+    brightness(0) saturate(100%)
+    invert(72%) sepia(38%) saturate(520%)
+    hue-rotate(7deg)
+    drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  animation: flotar 3.2s ease-in-out infinite;
+}
 @keyframes flotar {
   50% { transform: translateY(-5px); }
 }
@@ -160,27 +210,73 @@ h4 {
     hue-rotate(7deg);
 }
 
-/* ================= CONTADOR ================= */
-.esperamos { padding: 30px 20px 60px; }
+/* ============================================= CONTADOR =========================================================== */
+
+.esperamos {
+  padding: 30px 20px 60px;
+}
 
 .contador {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 12px;
   max-width: 420px;
-  margin: auto;
+  margin: 0 auto;
 }
 
+/* cada módulo */
 .contador .bloque {
+  display: flex;                 /* 🔑 centra contenido */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 90px;              /* 🔑 altura uniforme */
+  padding: 12px 6px;
+
   background: rgba(255,255,255,0.92);
-  border-radius: 14px;
-  padding: 12px;
+
+  border: 2px solid rgba(212,175,55,0.85); /* 🔑 línea dorada */
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 0 8px rgba(212,175,55,0.25),
+    0 6px 14px rgba(0,0,0,0.25);
 }
 
-.contador span {
+/* número */
+.contador .bloque span {
+  display: block;
+  font-size: 2rem;
+  font-weight: 600;
   color: #3a2f1d;
-  font-size: 1.8rem;
+  line-height: 1;
 }
+
+/* texto (Días, Horas, etc.) */
+.contador .bloque small {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #6b5a3a;
+}
+
+/* 📱 mobile */
+@media (max-width: 480px) {
+  .contador {
+    gap: 8px;
+  }
+
+  .contador .bloque {
+    min-height: 78px;
+  }
+
+  .contador .bloque span {
+    font-size: 1.6rem;
+  }
+}
+
 
 /* ================= BOTÓN MAPS ================= */
 .btn-maps,
@@ -296,7 +392,7 @@ h4 {
   gap: 8px;
 }
 
-/* ================= BOTÓN ================= */
+/* ============================================== BOTÓN ENVIAR =============================================== */
 .btn-enviar {
   margin-top: 18px;
   padding: 14px;
@@ -307,6 +403,7 @@ h4 {
   cursor: pointer;
 }
 
+/* ============================================== BOTÓN PLAY MÚSICA ============================================= */
 .music-player{
   position: fixed;
   bottom: 20px;
@@ -323,16 +420,6 @@ h4 {
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* ================= REGALOS ================= */
-.icono-regalo {
-  width: 92px;
-  animation: flotar 3.2s ease-in-out infinite;
-}
-@media (max-width: 480px) {
-  .icono-regalo {
-    width: 80px;
-  }
-}
 
 /* ============================================== CARRUSEL FLOTANTE ============================================= */
 .carousel {
@@ -345,7 +432,7 @@ h4 {
   display: flex;
   gap: 18px;
   width: max-content;
-  animation: scrollCarrusel 26s linear infinite;
+  
 }
 
 .carousel-track img {
@@ -357,12 +444,7 @@ h4 {
   box-shadow:
     0 8px 18px rgba(0,0,0,0.35),
     0 0 12px rgba(212,175,55,0.25);
-  animation: flotar 4s ease-in-out infinite;
-}
-
-@keyframes scrollCarrusel {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  
 }
 
 
@@ -375,7 +457,7 @@ h4 {
     height: 210px;
   }
 
-
+/* ====================================================== MENSAJE FINAL =============================0================= */
 .mensajefinal {
   padding: 60px 20px 80px;  
   position: relative;
