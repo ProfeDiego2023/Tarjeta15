@@ -1,12 +1,23 @@
-/* ================= BASE ================= */
+/* ================= RESET ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: clip;
+}
+
+/* ================= BASE ================= */
+body {
   font-family: 'Playfair Display', serif;
   color: #fff;
   text-align: center;
-  overflow-x: hidden;
+  background: url("img/fondoliso.jpeg") center / cover no-repeat fixed;
 }
 
 /* ================= CABECERA ================= */
@@ -14,25 +25,22 @@ body {
   min-height: 100svh;
   background: url("img/cabecera.jpeg") center / cover no-repeat;
   position: relative;
-  z-index: 1;
 }
 
 /* ================= LÍNEA DORADA ================= */
 .linea-dorada {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 42px;
-  left: 50%;
-  transform: translateX(-50%);
   margin: -21px 0;
-  z-index: 6;
+  pointer-events: none;
 }
 
 .linea-dorada::before {
   content: "";
   position: absolute;
   inset: 50% 0 auto 0;
-  height: 8px;
+  height: 6px;
   transform: translateY(-50%);
   background: linear-gradient(
     to right,
@@ -47,41 +55,42 @@ body {
 .linea-dorada::after {
   content: "";
   position: absolute;
-  inset: -11px 0 auto 0;
+  inset: -10px 0 auto 0;
   height: 100%;
-  background: url("img/lineafinal.png") center / 40% auto no-repeat;
+  background: url("img/lineafinal.png") center / 120px auto no-repeat;
   filter:
     brightness(0) saturate(100%)
     invert(73%) sepia(42%) saturate(520%)
-    hue-rotate(7deg) brightness(96%) contrast(92%)
-    drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+    hue-rotate(7deg);
 }
 
 /* ================= FONDO LISO ================= */
 .fondo-liso {
   position: relative;
-  background: url("img/fondoliso.jpeg") center / cover no-repeat;
-  z-index: 0;
 }
 
-.fondo-liso .velo {
+.fondo-liso::before {
+  content: "";
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.25);
   z-index: 1;
 }
 
-.fondo-liso .estrellas {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
 .fondo-liso > section {
   position: relative;
   z-index: 5;
+}
+
+/* ================= CONTENIDO ================= */
+.contenido {
+  padding: 56px 20px 40px;
+}
+
+.contenido p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #f7f0dc;
 }
 
 /* ================= TÍTULOS ================= */
@@ -96,8 +105,13 @@ body {
     0 0 22px rgba(212,175,55,0.6);
 }
 
+h4 {
+  color: #f5dc8a;
+  font-size: 1.05rem;
+}
 
-/* ================= CONTENIDO ================= */
+
+/* =================        CONTENIDO ================= */
 .contenido {
   padding: 60px 20px 40px;
 }
@@ -116,63 +130,42 @@ h4 {
 /* ================= ICONOS ================= */
 .icono-dorado {
   display: block;
-  margin: 18px auto 8px;   /* un poco más compacto */
-  width: 70px;             /* 🔑 MÁS CHICO */
-  height: auto;
+  margin: 16px auto 8px;
+  width: 58px;
   filter:
     brightness(0) saturate(100%)
     invert(72%) sepia(38%) saturate(520%)
-    hue-rotate(7deg) brightness(95%) contrast(92%)
+    hue-rotate(7deg)
     drop-shadow(0 2px 4px rgba(0,0,0,0.6));
-   animation: flotar 2.8s ease-in-out infinite;
+  animation: flotar 3s ease-in-out infinite;
 }
+
 @keyframes flotar {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
-
-@media (max-width: 480px) {
-  .icono-dorado {
-    width: 46px;
-    margin: 16px auto 6px;
-  }
-}
-
 /* ============================================== CONTENEDOR ======================================================== */
 .separador-linea {
   display: flex;
   justify-content: center;
-  align-items: center;
-
-  margin: 16px auto;
-  width: 100%;
+  margin: 14px 0;
   pointer-events: none;
 }
 
-/* IMAGEN DEL SEPARADOR */
-.separador-linea .linea-img {
-  width: 180px;        /* 🔑 achicá acá (90px / 80px si querés más chico) */
+.separador-linea img {
+  width: 120px;
   max-width: 60%;
-  height: auto;
-
   filter:
     brightness(0) saturate(100%)
     invert(72%) sepia(38%) saturate(520%)
-    hue-rotate(7deg) brightness(95%) contrast(92%)
-    drop-shadow(0 2px 4px rgba(0,0,0,0.45));
-
-  animation: flotarLinea 3s ease-in-out infinite;
-  opacity: 0.95;
+    hue-rotate(7deg);
 }
-
 
 /* ================= CONTADOR ================= */
 .esperamos { padding: 30px 20px 60px; }
 
 .contador {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   max-width: 420px;
   margin: auto;
@@ -180,33 +173,29 @@ h4 {
 
 .contador .bloque {
   background: rgba(255,255,255,0.92);
-  border: 2px solid #b89b5e;
   border-radius: 14px;
   padding: 12px;
 }
 
 .contador span {
   color: #3a2f1d;
-  font-size: 2rem;
-}
-
-.contador small {
-  color: #6b5a3a;
-  font-size: 0.7rem;
+  font-size: 1.8rem;
 }
 
 /* ================= BOTÓN MAPS ================= */
-.btn-maps {
+.btn-maps,
+.btn-enviar {
   display: inline-block;
-  margin-top: 24px;
-  padding: 14px 36px;
+  margin-top: 20px;
+  padding: 14px 34px;
   border-radius: 40px;
   background: linear-gradient(145deg,#f5dc8a,#cfa234);
   color: #000;
   font-weight: bold;
+  border: none;
   text-decoration: none;
+  cursor: pointer;
 }
-
 /* ================= VALOR TARJETA ================= */
 .lista-valores {
   list-style: none;
@@ -325,7 +314,7 @@ h4 {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.6);
+  background: #cfa234;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -346,90 +335,45 @@ h4 {
 }
 
 /* ============================================== CARRUSEL FLOTANTE ============================================= */
-.linea-dorada2 {
-  bottom: 14px;
-  position: relative;
-  width: 100vw;
-  height: 42px;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: -21px 0;
-  z-index: 6;
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px;
 }
 
-.linea-dorada2::before {
-  content: "";
-  position: absolute;
-  inset: 50% 0 auto 0;
-  height: 8px;
-  transform: translateY(-50%);
-  background: linear-gradient(
-    to right,
-    transparent,
-    #f6e3a1,
-    #d4af37,
-    #f6e3a1,
-    transparent
-  );
-}
-.linea-dorada2::after {
-  content: "";
-  position: absolute;
-  inset: -11px 0 auto 0;
-  height: 100%;
-  background: url("img/lineafinal.png") center / 40% auto no-repeat;
-  filter:
-    brightness(0) saturate(100%)
-    invert(73%) sepia(42%) saturate(520%)
-    hue-rotate(7deg) brightness(96%) contrast(92%)
-    drop-shadow(0 1px 2px rgba(0,0,0,0.35));
-}
-.galeria-fotos {
-  position: relative;
-  overflow: hidden;
-  padding: 30px 0;
-  background-image: url('img/fondoliso.jpeg'); 
- top: -10px;
-}
-.velo {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.25);
-  z-index: 1;
-} 
 .carousel-track {
   display: flex;
-  gap: 16px;
-  animation: scrollCarousel 10s linear infinite;
+  gap: 18px;
+  width: max-content;
+  animation: scrollCarrusel 26s linear infinite;
 }
-@keyframes scrollCarousel {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+
 .carousel-track img {
   width: 200px;
   height: 280px;
   object-fit: cover;
   border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  background: transparent;
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.35),
+    0 0 12px rgba(212,175,55,0.25);
+  animation: flotar 4s ease-in-out infinite;
 }
 
-
-/* 📱 MOBILE */
-@media (max-width: 480px) {
-  .carousel-track img {
-    width: 160px;
-    height: 220px;
-  }
+@keyframes scrollCarrusel {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 
 
 /* ================= MOBILE ================= */
-@media (max-width:480px){
-  .grupo-menu { grid-template-columns: 1fr; }
-  .icono-dorado { width: 56px; }
-}
+@media (max-width: 480px) {
+  .icono-dorado { width: 46px; }
+  .carousel-track img {
+    width: 150px;
+    height: 210px;
+  }
 
 
 .mensajefinal {
@@ -443,4 +387,5 @@ h4 {
   font-size: 2rem;
   margin-top: 0;
   z-index: 5;
+}
 }
