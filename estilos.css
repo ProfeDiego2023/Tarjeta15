@@ -154,7 +154,7 @@ body {
 }
 
 /* 📱 CELULAR EN HORIZONTAL */
-@media (max-height: 450px) and (orientation: landscape) {
+@media (max-height: 500px) and (orientation: landscape) {
 
   .hero-fondo {
     min-height: 120vh;
