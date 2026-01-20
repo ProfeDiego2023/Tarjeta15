@@ -82,6 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const nombre = form.querySelector('input[name="nombre"]')?.value.trim();
     const asistencia = form.querySelector('select[name="asistencia"]')?.value;
 
+    const detalleOtro = form.querySelector('input[name="menu_otro_detalle"]')?.value.trim();
+
+    if (menus.includes("Otro") && detalleOtro) {
+        mensaje += `🍽️ *Menú especial:* ${detalleOtro}\n\n`;
+    }
+
     if (!nombre || !asistencia) {
       mostrarMensaje("⚠️ Completá nombre y asistencia", false);
       return;
@@ -142,6 +148,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   }
 }
+
+
+  /* ===================================================== OTRO ======================================================*/
+const chkOtro = document.getElementById("menuOtro");
+const inputOtro = document.getElementById("detalleOtro");
+
+if (chkOtro && inputOtro) {
+  chkOtro.addEventListener("change", () => {
+    if (chkOtro.checked) {
+      inputOtro.classList.remove("oculto");
+      inputOtro.focus();
+    } else {
+      inputOtro.classList.add("oculto");
+      inputOtro.value = "";
+    }
+  });
+}
+
+ /* =====================================================
+     explosion estrellas  completo
+  ===================================================== */
+ const capa = document.getElementById("efectos-globales");
+  if (!capa) return;
+
+  function crearExplosion() {
+    const explosion = document.createElement("div");
+    explosion.className = "explosion-estrellas";
+
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+
+    explosion.style.left = `${x}px`;
+    explosion.style.top = `${y}px`;
+
+    const cantidad = 30;
+    for (let i = 0; i < cantidad; i++) {
+      explosion.appendChild(document.createElement("span"));
+    }
+
+    capa.appendChild(explosion);
+
+    setTimeout(() => explosion.remove(), 4500);
+  }
+
+  setInterval(crearExplosion, 1800);
 
 
 });

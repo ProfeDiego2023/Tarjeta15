@@ -5,12 +5,15 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+  width: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;   /* solo bloquea horizontal */
+  overflow-y: auto;     /* ✅ PERMITE RECORRER */
 }
+
 
 /* ================= BASE ================= */
 body {
@@ -483,6 +486,30 @@ h4 {
   align-items: center;
   gap: 8px;
 }
+/* input detalle OTRO */
+.input-otro {
+  grid-column: 1 / -1; /* ocupa todo el ancho */
+  margin-top: 6px;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(212,175,55,0.5);
+  background: rgba(0,0,0,0.35);
+  color: #f7f0dc;
+  font-size: 0.9rem;
+  outline: none;
+
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* placeholder */
+.input-otro::placeholder {
+  color: rgba(247,240,220,0.6);
+}
+
+/* oculto */
+.oculto {
+  display: none;
+}
 
 /* ============================================== BOTÓN ENVIAR =============================================== */
 .btn-enviar {
@@ -648,67 +675,116 @@ h4 {
 
 .explosion-estrellas {
   position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   pointer-events: none;
-  z-index: 1;
+  z-index: 6;
 }
 
-/* estrella individual */
+/* estrella base */
 .explosion-estrellas span {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  top: 50%;
+  left: 50%;
+
+  width: var(--size);
+  height: var(--size);
   border-radius: 50%;
 
   background: radial-gradient(
     circle,
-    #fff 20%,
+    #fff 25%,
     #f6e3a1 45%,
-    rgba(212,175,55,0.8) 65%,
-    transparent 80%
+    rgba(212,175,55,0.9) 60%,
+    transparent 78%
   );
 
   box-shadow:
-    0 0 10px rgba(246,227,161,0.9),
-    0 0 18px rgba(212,175,55,0.7);
+    0 0 12px rgba(246,227,161,0.9),
+    0 0 22px rgba(212,175,55,0.7);
 
   opacity: 0;
-  animation: explosion 4.5s ease-out infinite;
+  animation: explosion 5s ease-out infinite;
 }
 
-/* direcciones distintas */
-.explosion-estrellas span:nth-child(1)  { --x: -120px; --y: -60px; animation-delay: 0s; }
-.explosion-estrellas span:nth-child(2)  { --x:  100px; --y: -80px; animation-delay: 0.2s; }
-.explosion-estrellas span:nth-child(3)  { --x: -90px;  --y:  90px; animation-delay: 0.4s; }
-.explosion-estrellas span:nth-child(4)  { --x:  120px; --y:  60px; animation-delay: 0.6s; }
-.explosion-estrellas span:nth-child(5)  { --x:  0px;   --y: -130px; animation-delay: 0.8s; }
-.explosion-estrellas span:nth-child(6)  { --x: -140px; --y:  0px; animation-delay: 1s; }
-.explosion-estrellas span:nth-child(7)  { --x:  140px; --y:  0px; animation-delay: 1.2s; }
-.explosion-estrellas span:nth-child(8)  { --x:  0px;   --y:  140px; animation-delay: 1.4s; }
-.explosion-estrellas span:nth-child(9)  { --x: -80px;  --y: -120px; animation-delay: 1.6s; }
-.explosion-estrellas span:nth-child(10) { --x:  80px;  --y:  120px; animation-delay: 1.8s; }
+/* ================= POSICIONES (24 ESTRELLAS) ================= */
 
-/* animación explosión */
+.explosion-estrellas span:nth-child(1)  { --x:-220px; --y:-120px; --size:5px;  animation-delay:0s; }
+.explosion-estrellas span:nth-child(2)  { --x:240px;  --y:-90px;  --size:6px;  animation-delay:.2s; }
+.explosion-estrellas span:nth-child(3)  { --x:-180px; --y:140px;  --size:4px;  animation-delay:.4s; }
+.explosion-estrellas span:nth-child(4)  { --x:200px;  --y:160px;  --size:6px;  animation-delay:.6s; }
+
+.explosion-estrellas span:nth-child(5)  { --x:0px;    --y:-260px; --size:7px;  animation-delay:.8s; }
+.explosion-estrellas span:nth-child(6)  { --x:-260px; --y:0px;   --size:5px;  animation-delay:1s; }
+.explosion-estrellas span:nth-child(7)  { --x:260px;  --y:0px;   --size:6px;  animation-delay:1.2s; }
+.explosion-estrellas span:nth-child(8)  { --x:0px;    --y:260px; --size:7px;  animation-delay:1.4s; }
+
+.explosion-estrellas span:nth-child(9)  { --x:-140px; --y:-220px;--size:4px;  animation-delay:.3s; }
+.explosion-estrellas span:nth-child(10) { --x:140px;  --y:220px; --size:5px;  animation-delay:.5s; }
+
+.explosion-estrellas span:nth-child(11) { --x:-300px; --y:-60px; --size:6px;  animation-delay:.7s; }
+.explosion-estrellas span:nth-child(12) { --x:300px;  --y:80px;  --size:5px;  animation-delay:.9s; }
+
+.explosion-estrellas span:nth-child(13) { --x:-90px;  --y:300px; --size:4px;  animation-delay:1.1s; }
+.explosion-estrellas span:nth-child(14) { --x:90px;   --y:-300px;--size:6px;  animation-delay:1.3s; }
+
+.explosion-estrellas span:nth-child(15) { --x:-200px; --y:-200px;--size:5px;  animation-delay:.4s; }
+.explosion-estrellas span:nth-child(16) { --x:200px;  --y:200px; --size:6px;  animation-delay:.6s; }
+
+.explosion-estrellas span:nth-child(17) { --x:-340px; --y:0px;   --size:7px;  animation-delay:.8s; }
+.explosion-estrellas span:nth-child(18) { --x:340px;  --y:0px;   --size:7px;  animation-delay:1s; }
+
+.explosion-estrellas span:nth-child(19) { --x:-120px; --y:340px; --size:5px;  animation-delay:1.2s; }
+.explosion-estrellas span:nth-child(20) { --x:120px;  --y:-340px;--size:6px;  animation-delay:1.4s; }
+
+.explosion-estrellas span:nth-child(21) { --x:-280px; --y:180px; --size:4px;  animation-delay:.5s; }
+.explosion-estrellas span:nth-child(22) { --x:280px;  --y:-180px;--size:5px;  animation-delay:.7s; }
+
+.explosion-estrellas span:nth-child(23) { --x:-60px;  --y:380px; --size:6px;  animation-delay:1.1s; }
+.explosion-estrellas span:nth-child(24) { --x:60px;   --y:-380px;--size:7px;  animation-delay:1.3s; }
+
+/* ================= ANIMACIÓN ================= */
+
 @keyframes explosion {
   0% {
-    transform: translate(0,0) scale(0.3);
+    transform: translate(0,0) scale(0.2);
     opacity: 0;
   }
-  20% {
+
+  15% {
     opacity: 1;
   }
-  60% {
-    transform: translate(var(--x), var(--y)) scale(1.2);
-    opacity: 0.8;
+
+  70% {
+    transform: translate(var(--x), var(--y)) scale(1.4);
+    opacity: 0.85;
   }
+
   100% {
-    transform: translate(var(--x), var(--y)) scale(0.6);
+    transform: translate(var(--x), var(--y)) scale(0.4);
     opacity: 0;
   }
 }
 
+/* CONTENEDOR GLOBAL DE EFECTOS */
+#efectos-globales {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+  overflow: hidden;
+}
+
+/* explosiones */
+.explosion-estrellas {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+
+
+/* ❌ ELIMINAR FIXED DEL FONDO */
+body {
+  background-attachment: scroll !important;
+}
 
 

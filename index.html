@@ -13,6 +13,8 @@
 </head>
 <body>
 
+  <div id="efectos-globales"></div>
+
 
 <!-- ================= CABECERA ================= -->
 <section class="hero-fondo"></section>
@@ -27,7 +29,7 @@
   <!-- ================= TE ESPERAMOS ================= -->
   <section class="contenido">
     <img src="img/fiesta.png" class="icono-fiesta" alt="Fiesta">
-    <h3 class="titulo-seccion">Te esperamos ✨</h3>
+    <h3 class="titulo-seccion"> ¡ Fiesta ! ✨</h3>
     <p>Una noche especial para compartir, celebrar y disfrutar juntos.</p>
     <h4>No te olvides, Sábado 28 de febrero a las 21 horas</h4>
     <div class="separador-linea">
@@ -127,7 +129,20 @@
           <label><input type="checkbox" name="menu[]" value="Vegetariano"> Vegetariano</label>
           <label><input type="checkbox" name="menu[]" value="Vegano"> Vegano</label>
           <label><input type="checkbox" name="menu[]" value="Celíaco"> Celíaco</label>
-          <label><input type="checkbox" name="menu[]" value="Otro"> Otro</label>
+          <label class="menu-otro">
+            <input type="checkbox" id="menuOtro" name="menu[]" value="Otro">
+              Otro
+          </label>
+
+          <!-- INPUT DETALLE -->
+          <input
+            type="text"
+            id="detalleOtro"
+            name="menu_otro_detalle"
+            placeholder="Especificá el menú..."
+            class="input-otro oculto"
+          >
+
         </div>
       </fieldset>
 
@@ -145,7 +160,7 @@
     <h3 class="titulo-seccion">Regalos</h3>
     <p>
       <strong>El mejor regalo es tu presencia</strong><br>
-      pero si deseás hacerme un obsequio, podés hacerlo mediante el alias:
+      pero si querés darme un obsequio, podés hacerlo mediante el alias:
       <h4>florii.gonzalez</h4><br>
     </p>
     <div class="separador-linea">
@@ -176,10 +191,14 @@
   <div class="explosion-estrellas">
     <span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
 
   <p>Hagamos juntos una noche inolvidable</p>
-  <h3>Te esperamos ✨</h3>
+  <h3>Te espero ✨</h3>
 </div>
 
 </section> <!-- cierre fondo liso (VELO) -->
