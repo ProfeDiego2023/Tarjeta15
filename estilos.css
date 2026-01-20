@@ -111,6 +111,19 @@
     height: 360px;
   }
 }
+/* ============================================== 🔹 CELULARES EN HORIZONTAL ============================================= */
+@media (max-height: 500px) and (orientation: landscape) {
+
+  .hero-fondo {
+    min-height: 100vh;
+
+    /* 🔑 RESPETA PROPORCIÓN */
+    background-size: contain;
+
+    /* relleno elegante */
+    background-color: #000;
+  }
+}
 
 /* ===================================================== RESET ==============================================0====== */
 *,
@@ -149,24 +162,16 @@ body {
 
 /* ================================================ CABECERA ================================================ */
 .hero-fondo {
+  position: relative;
+  width: 100%;
   min-height: 100svh;
-  background: url("img/cabecera.jpeg") center / cover no-repeat;
+
+  background-image: url("img/cabecera.jpeg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
-/* 📱 CELULAR EN HORIZONTAL */
-@media (max-height: 500px) and (orientation: landscape) {
-
-  .hero-fondo {
-    min-height: 150vh;
-
-    /* 🔑 CAMBIO CLAVE */
-    background-size: contain;
-    background-position: center center;
-
-    /* evita bandas */
-    background-color: #000;
-  }
-}
 
 
 /* ============================================= LÍNEA DORADA ================================================= */
