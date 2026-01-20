@@ -151,8 +151,23 @@ body {
 .hero-fondo {
   min-height: 100svh;
   background: url("img/cabecera.jpeg") center / cover no-repeat;
-  position: relative;
 }
+
+/* 📱 CELULAR EN HORIZONTAL */
+@media (max-height: 500px) and (orientation: landscape) {
+
+  .hero-fondo {
+    min-height: 100vh;
+
+    /* 🔑 CAMBIO CLAVE */
+    background-size: contain;
+    background-position: center center;
+
+    /* evita bandas */
+    background-color: #000;
+  }
+}
+
 
 /* ============================================= LÍNEA DORADA ================================================= */
 .linea-dorada {
