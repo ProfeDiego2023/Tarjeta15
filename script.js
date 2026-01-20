@@ -69,8 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =====================================================
-     ENVÍO WHATSAPP
-  ===================================================== */
+   ENVÍO WHATSAPP (CON INVITADOS + MENÚ)
+===================================================== */
+
 const checkOtro = document.getElementById("menu-otro-check");
 const inputOtro = document.getElementById("menu-otro-texto");
 const wrapperOtro = document.querySelector(".menu-otro-wrapper");
@@ -79,9 +80,7 @@ const form = document.getElementById("form-confirmacion");
 if (checkOtro && wrapperOtro && inputOtro) {
   checkOtro.addEventListener("change", () => {
     wrapperOtro.classList.toggle("activo", checkOtro.checked);
-    if (!checkOtro.checked) {
-      inputOtro.value = "";
-    }
+    if (!checkOtro.checked) inputOtro.value = "";
   });
 }
 
@@ -105,12 +104,31 @@ if (form) {
     }
 
     let mensaje = `✨ *Confirmación de asistencia* ✨\n\n`;
-    mensaje += `👤 Nombre: ${nombre}\n`;
-    mensaje += `📩 Asistencia: ${asistencia}\n\n`;
+    mensaje += `👤 *Nombre:* ${nombre}\n`;
+    mensaje += `📩 *Asistencia:* ${asistencia}\n\n`;
 
+    /* ================= INVITADOS ================= */
     if (asistencia === "SI") {
-      mensaje += `🍽️ *Menú*\n`;
 
+      const getNumero = (name) => {
+        const el = form.querySelector(`input[name="${name}"]`);
+        return el && el.value ? el.value : "0";
+      };
+
+      const mayores = getNumero("mayores");
+      const m25 = getNumero("menores_2_5");
+      const m612 = getNumero("menores_6_12");
+      const adolescentes = getNumero("adolescentes");
+      const trasnoche = getNumero("trasnoche");
+
+      mensaje += `👥 *Invitados*\n`;
+      mensaje += `• Mayores: ${mayores}\n`;
+      mensaje += `• Menores 2 a 5: ${m25}\n`;
+      mensaje += `• Menores 6 a 12: ${m612}\n`;
+      mensaje += `• Adolescentes: ${adolescentes}\n`;
+      mensaje += `• Trasnoche: ${trasnoche}\n\n`;
+
+      /* ================= MENÚ ================= */
       const menus = [...form.querySelectorAll('input[name="menu[]"]:checked')]
         .map(el => {
           if (el.value === "Otro") {
@@ -119,11 +137,17 @@ if (form) {
           return el.value;
         });
 
-      mensaje += menus.join(", ") + "\n\n";
+      if (menus.length > 0) {
+        mensaje += `🍽️ *Menú*\n`;
+        menus.forEach(m => mensaje += `• ${m}\n`);
+        mensaje += `\n`;
+      }
+
+      /* ================= ALIAS ================= */
       
     }
 
-    mensaje += `💛 Gracias por confirmar`;
+    
 
     const telefono = "5493496416439"; // tu número
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
