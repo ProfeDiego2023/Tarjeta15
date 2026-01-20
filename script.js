@@ -71,25 +71,36 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =====================================================
      ENVÍO WHATSAPP
   ===================================================== */
-  const form = document.getElementById("form-confirmacion");
-  const mensajeUI = document.getElementById("mensaje-confirmado");
+const checkOtro = document.getElementById("menu-otro-check");
+const inputOtro = document.getElementById("menu-otro-texto");
+const wrapperOtro = document.querySelector(".menu-otro-wrapper");
+const form = document.getElementById("form-confirmacion");
 
-  if (!form) return;
+if (checkOtro && wrapperOtro && inputOtro) {
+  checkOtro.addEventListener("change", () => {
+    wrapperOtro.classList.toggle("activo", checkOtro.checked);
+    if (!checkOtro.checked) {
+      inputOtro.value = "";
+    }
+  });
+}
 
+if (form) {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const nombre = form.querySelector('input[name="nombre"]')?.value.trim();
-    const asistencia = form.querySelector('select[name="asistencia"]')?.value;
-
-    const detalleOtro = form.querySelector('input[name="menu_otro_detalle"]')?.value.trim();
-
-    if (menus.includes("Otro") && detalleOtro) {
-        mensaje += `🍽️ *Menú especial:* ${detalleOtro}\n\n`;
-    }
+    const nombre = form.querySelector('input[name="nombre"]').value.trim();
+    const asistencia = form.querySelector('select[name="asistencia"]').value;
 
     if (!nombre || !asistencia) {
-      mostrarMensaje("⚠️ Completá nombre y asistencia", false);
+      alert("Completá nombre y asistencia");
+      return;
+    }
+
+    /* VALIDACIÓN OBLIGATORIA DEL OTRO */
+    if (checkOtro.checked && inputOtro.value.trim() === "") {
+      inputOtro.focus();
+      inputOtro.style.boxShadow = "0 0 0 2px #d4af37";
       return;
     }
 
@@ -98,73 +109,30 @@ document.addEventListener("DOMContentLoaded", () => {
     mensaje += `📩 Asistencia: ${asistencia}\n\n`;
 
     if (asistencia === "SI") {
-      mensaje += `👥 Invitados:\n`;
-      mensaje += `- Mayores: ${valorNumero("mayores")}\n`;
-      mensaje += `- Menores 2 a 5: ${valorNumero("menores_2_5")}\n`;
-      mensaje += `- Menores 6 a 12: ${valorNumero("menores_6_12")}\n`;
-      mensaje += `- Adolescentes: ${valorNumero("adolescentes")}\n`;
-      mensaje += `- Trasnoche: ${valorNumero("trasnoche")}\n\n`;
+      mensaje += `🍽️ *Menú*\n`;
 
       const menus = [...form.querySelectorAll('input[name="menu[]"]:checked')]
-        .map(el => el.value);
+        .map(el => {
+          if (el.value === "Otro") {
+            return `Otro: ${inputOtro.value.trim()}`;
+          }
+          return el.value;
+        });
 
-      if (menus.length) {
-        mensaje += `🍽️ Menú: ${menus.join(", ")}\n\n`;
-      }
-
-      mensaje += `💳 Alias para transferencia:\nmelu.1985\n\n`;
+      mensaje += menus.join(", ") + "\n\n";
+      mensaje += `💳 Alias: melu.1985\n\n`;
     }
 
     mensaje += `💛 Gracias por confirmar`;
 
-    const telefono = "5493496538566"; // ✅ TU NÚMERO
+    const telefono = "5493496538566"; // tu número
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
     window.open(url, "_blank");
-    mostrarMensaje("✨ Confirmación enviada ✨", true);
-  });
-
-  function valorNumero(name) {
-    return form.querySelector(`input[name="${name}"]`)?.value || "0";
-  }
-
-  function mostrarMensaje(texto, ok) {
-  if (!mensajeUI) return;
-
-  mensajeUI.textContent = texto;
-  mensajeUI.classList.remove("activo");
-
-  if (ok) {
-    // 🔊 reproducir sonido
-    const sonido = document.getElementById("sonido-enviado");
-    if (sonido) {
-      sonido.currentTime = 0;
-      sonido.play().catch(() => {});
-    }
-
-    // ✨ animación visual
-    setTimeout(() => {
-      mensajeUI.classList.add("activo");
-    }, 100);
-  }
-}
-
-
-  /* ===================================================== OTRO ======================================================*/
-const chkOtro = document.getElementById("menuOtro");
-const inputOtro = document.getElementById("detalleOtro");
-
-if (chkOtro && inputOtro) {
-  chkOtro.addEventListener("change", () => {
-    if (chkOtro.checked) {
-      inputOtro.classList.remove("oculto");
-      inputOtro.focus();
-    } else {
-      inputOtro.classList.add("oculto");
-      inputOtro.value = "";
-    }
   });
 }
+
+
 
  /* =====================================================
      explosion estrellas  completo

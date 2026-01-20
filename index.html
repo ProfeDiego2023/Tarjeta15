@@ -130,18 +130,17 @@
           <label><input type="checkbox" name="menu[]" value="Vegano"> Vegano</label>
           <label><input type="checkbox" name="menu[]" value="Celíaco"> Celíaco</label>
           <label class="menu-otro">
-            <input type="checkbox" id="menuOtro" name="menu[]" value="Otro">
+            <input type="checkbox" name="menu[]" value="Otro" id="menu-otro-check">
               Otro
           </label>
 
-          <!-- INPUT DETALLE -->
-          <input
-            type="text"
-            id="detalleOtro"
-            name="menu_otro_detalle"
-            placeholder="Especificá el menú..."
-            class="input-otro oculto"
-          >
+          <!-- 🔑 CONTENEDOR BLOQUE -->
+            <div class="menu-otro-wrapper">
+              <input
+                type="text"
+                id="menu-otro-texto"
+                placeholder="Ej. Sin TACC, Diabético, Hipertenso..."
+              >
 
         </div>
       </fieldset>
