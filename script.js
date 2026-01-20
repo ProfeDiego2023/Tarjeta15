@@ -123,9 +123,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function mostrarMensaje(texto, ok) {
-    if (!mensajeUI) return;
-    mensajeUI.textContent = texto;
-    mensajeUI.classList.toggle("activo", ok);
+  if (!mensajeUI) return;
+
+  mensajeUI.textContent = texto;
+  mensajeUI.classList.remove("activo");
+
+  if (ok) {
+    // 🔊 reproducir sonido
+    const sonido = document.getElementById("sonido-enviado");
+    if (sonido) {
+      sonido.currentTime = 0;
+      sonido.play().catch(() => {});
+    }
+
+    // ✨ animación visual
+    setTimeout(() => {
+      mensajeUI.classList.add("activo");
+    }, 100);
   }
+}
+
 
 });
