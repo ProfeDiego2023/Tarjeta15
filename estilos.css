@@ -63,28 +63,19 @@
   }
 }
 /* ============================================== 📱➡️ TABLET VERTICAL ============================================= */
-@media (max-width: 768px) {
-
-  .contenido {
-    padding: 60px 24px 44px;
-  }
-
-  .carousel-track img {
-    width: 190px;
-    height: 260px;
+@media (min-width: 600px) and (max-width: 1023px) {
+  .hero-fondo {
+    min-height: 100vh;
+    background-size: cover;
   }
 }
+
 /* ==================================== 📱➡️➡️ TABLET HORIZONTAL / NETBOOKS 10-11" ====================================== */
-@media (max-width: 1024px) {
-
-  .contenido,
-  .confirmacion form {
-    max-width: 520px;
-  }
-
-  .carousel-track img {
-    width: 210px;
-    height: 290px;
+@media (min-width: 1024px) {
+  .hero-fondo {
+    min-height: 100vh;
+    aspect-ratio: auto;
+    background-size: cover;
   }
 }
 /* ============================================== 💻 NOTEBOOK 14" ============================================= */
@@ -112,18 +103,19 @@
   }
 }
 /* ============================================== 🔹 CELULARES EN HORIZONTAL ============================================= */
-@media (max-height: 500px) and (orientation: landscape) {
-
+@media (orientation: landscape) and (max-height: 520px) {
   .hero-fondo {
+    aspect-ratio: auto;
     min-height: 100vh;
 
-    /* 🔑 RESPETA PROPORCIÓN */
+    /* 🔑 respeta la imagen completa */
     background-size: contain;
 
-    /* relleno elegante */
+    /* relleno elegante para bandas */
     background-color: #000;
   }
 }
+
 
 /* ===================================================== RESET ==============================================0====== */
 *,
@@ -164,6 +156,11 @@ body {
 .hero-fondo {
   position: relative;
   width: 100%;
+
+  /* 🔑 proporción exacta 4:5 */
+  aspect-ratio: 4 / 5;
+
+  /* ocupa toda la pantalla en vertical */
   min-height: 100svh;
 
   background-image: url("img/cabecera.jpeg");
@@ -171,6 +168,7 @@ body {
   background-position: center center;
   background-size: cover;
 }
+
 
 
 
