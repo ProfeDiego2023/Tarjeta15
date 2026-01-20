@@ -120,12 +120,12 @@ if (form) {
         });
 
       mensaje += menus.join(", ") + "\n\n";
-      mensaje += `💳 Alias: melu.1985\n\n`;
+      
     }
 
     mensaje += `💛 Gracias por confirmar`;
 
-    const telefono = "5493496538566"; // tu número
+    const telefono = "5493496416439"; // tu número
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
     window.open(url, "_blank");
