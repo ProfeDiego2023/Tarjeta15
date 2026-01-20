@@ -157,7 +157,7 @@ body {
 @media (max-height: 450px) and (orientation: landscape) {
 
   .hero-fondo {
-    min-height: 100vh;
+    min-height: 120vh;
 
     /* 🔑 CAMBIO CLAVE */
     background-size: contain;
